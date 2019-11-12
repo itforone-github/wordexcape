@@ -53,12 +53,10 @@ class Viewmanager extends WebViewClient {
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
         if(!url.equals(mainActivity.getString(R.string.index))) {
-            Toast.makeText(mainActivity.getApplicationContext(),mainActivity.getString(R.string.index),Toast.LENGTH_LONG).show();
             FrameLayout nativead =  (FrameLayout)mainActivity.findViewById(R.id.fl_adpalce);
             nativead.setVisibility(View.GONE);
         }
         else{
-            Toast.makeText(mainActivity.getApplicationContext(),mainActivity.getString(R.string.index),Toast.LENGTH_LONG).show();
             FrameLayout nativead =  (FrameLayout)mainActivity.findViewById(R.id.fl_adpalce);
             nativead.setVisibility(View.VISIBLE);
         }

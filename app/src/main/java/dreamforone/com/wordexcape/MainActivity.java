@@ -2,11 +2,13 @@ package dreamforone.com.wordexcape;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -37,7 +39,8 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.webView)   WebView webView;
     @BindView(R.id.adView_banner)   AdView banner;
-    @BindView(R.id.fl_adpalce)    FrameLayout frameLayout ;
+    @BindView(R.id.fl_adpalce)    FrameLayout frameLayout;
+    @BindView(R.id.refreshlayout)   SwipeRefreshLayout refreshlayout;
 //    @BindView(R.id.fullbt)   Button fulladbt;
     private long backPrssedTime = 0;
     private InterstitialAd mInterstitialAd;
@@ -54,6 +57,28 @@ public class MainActivity extends AppCompatActivity {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+
+        refreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                webView.clearCache(true);
+                webView.reload();
+                refreshlayout.setRefreshing(false);
+            }
+        });
+
+        refreshlayout.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                if(webView.getScrollY() == 0){
+                    refreshlayout.setEnabled(true);
+                }
+                else{
+                    refreshlayout.setEnabled(false);
+                }
             }
         });
 
@@ -111,8 +136,6 @@ public class MainActivity extends AppCompatActivity {
                 frameLayout.addView(adView);
             }
         });
-
-
 
         AdLoader adLoader = builder.withAdListener(new AdListener() {
             @Override
