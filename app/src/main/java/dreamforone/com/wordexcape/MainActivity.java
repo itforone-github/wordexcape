@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.webView)   WebView webView;
     @BindView(R.id.adView_banner)   AdView banner;
     @BindView(R.id.fl_adpalce)    FrameLayout frameLayout ;
-    @BindView(R.id.fullbt)   Button fulladbt;
+//    @BindView(R.id.fullbt)   Button fulladbt;
     private long backPrssedTime = 0;
     private InterstitialAd mInterstitialAd;
     private UnifiedNativeAd nativeAd;
@@ -56,32 +56,39 @@ public class MainActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        mInterstitialAd = new InterstitialAd(this);
+
+        mInterstitialAd = new InterstitialAd(getApplicationContext());
         mInterstitialAd.setAdUnitId(getString(R.string.test));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
+//        mInterstitialAd = new InterstitialAd(this);
+//        mInterstitialAd.setAdUnitId(getString(R.string.test));
+//        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+//
+//        //버튼 이벤트시 광고 노출
+//        fulladbt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mInterstitialAd.isLoaded()) {
+//                    mInterstitialAd.show();
+//                } else {
+//                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+//                    Toast.makeText(getApplicationContext(),"로딩중입니다.",Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
 
-        //버튼 이벤트시 광고 노출
-        fulladbt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-                    Log.d("TAG", "The interstitial wasn't loaded yet.");
-                    Toast.makeText(getApplicationContext(),"로딩중입니다.",Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-        //배너 광고 로드
-        banner.loadAd(new AdRequest.Builder().build());
-        //전면 광고 닫기시
-        mInterstitialAd.setAdListener(new AdListener() {
+        /*   mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
                 // Load the next interstitial.
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
             }
-        });
+        });*/
+
+        //배너 광고 로드
+        banner.loadAd(new AdRequest.Builder().build());
+        //전면 광고 닫기시
+
 
         MobileAds.initialize(this,getString(R.string.app_id));
 
@@ -121,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new WebviewJavainterface(),"Android");
-        webView.setWebViewClient(new Viewmanager(this));
+        webView.setWebViewClient(new Viewmanager(this, mInterstitialAd));
         webView.setWebChromeClient(new WebchromeClient(this, this));
         webView.loadUrl(getString(R.string.index));
 
