@@ -1,4 +1,4 @@
-package dreamforone.com.wordexcape;
+package com.vocaescape.vocaescape;
 
 import org.junit.Test;
 

@@ -6,45 +6,59 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        >-->
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         >
-        <dreamforone.com.wordexcape.scrollWebview
-            android:id="@+id/webView"
-            android:layout_width="match_parent"
-            android:layout_height="700dp" />
-
+<!--        <com.vocaescape.vocaescape.scrollWebview-->
+<!--            android:id="@+id/webView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="0.7"-->
+<!--            />-->
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/webView"
+                />
 <!--        <Button-->
 <!--            android:id="@+id/fullbt"-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="50dp"-->
 <!--            android:text="광고보기"-->
 <!--            />-->
-        <FrameLayout
-            android:id="@+id/fl_adpalce"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="230dp"
+            android:weightSum="1"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:id="@+id/fl_adplace"
             />
 
         <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adView_banner"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             ads:adSize="SMART_BANNER"
             ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
         </com.google.android.gms.ads.AdView>
 
-
     </LinearLayout>
-    </ScrollView>
+    </FrameLayout>
+<!--    </ScrollView>-->
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

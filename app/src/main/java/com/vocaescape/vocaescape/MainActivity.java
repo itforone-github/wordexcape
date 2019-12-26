@@ -1,12 +1,10 @@
-package dreamforone.com.wordexcape;
+package com.vocaescape.vocaescape;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.webkit.JavascriptInterface;
@@ -25,9 +23,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.formats.MediaView;
-import com.google.android.gms.ads.formats.NativeAd;
 
-import com.google.android.gms.ads.formats.NativeAdOptions;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.google.android.gms.ads.initialization.InitializationStatus;
@@ -39,7 +35,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.webView)   WebView webView;
     @BindView(R.id.adView_banner)   AdView banner;
-    @BindView(R.id.fl_adpalce)    FrameLayout frameLayout;
+    @BindView(R.id.fl_adplace)    FrameLayout frameLayout;
     @BindView(R.id.refreshlayout)   SwipeRefreshLayout refreshlayout;
 //    @BindView(R.id.fullbt)   Button fulladbt;
     private long backPrssedTime = 0;
@@ -253,8 +249,6 @@ public class MainActivity extends AppCompatActivity {
         // native ad view with this native ad. The SDK will populate the adView's MediaView
         // with the media content from this native ad.
         adView.setNativeAd(nativeAd);
-
-
     }
 
     private class WebviewJavainterface {

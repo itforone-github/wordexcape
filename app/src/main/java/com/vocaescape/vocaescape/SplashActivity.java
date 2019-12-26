@@ -1,4 +1,4 @@
-package dreamforone.com.wordexcape;
+package com.vocaescape.vocaescape;
 
 import android.os.Bundle;
 import android.os.Handler;

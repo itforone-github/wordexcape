@@ -1,11 +1,7 @@
-package dreamforone.com.wordexcape;
+package com.vocaescape.vocaescape;
 
-import android.app.Activity;
-import android.os.Build;
 import android.util.Log;
 import android.view.View;
-import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -53,11 +49,11 @@ class Viewmanager extends WebViewClient {
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
         if(!url.equals(mainActivity.getString(R.string.index))) {
-            FrameLayout nativead =  (FrameLayout)mainActivity.findViewById(R.id.fl_adpalce);
+            FrameLayout nativead =  (FrameLayout)mainActivity.findViewById(R.id.fl_adplace);
             nativead.setVisibility(View.GONE);
         }
         else{
-            FrameLayout nativead =  (FrameLayout)mainActivity.findViewById(R.id.fl_adpalce);
+            FrameLayout nativead =  (FrameLayout)mainActivity.findViewById(R.id.fl_adplace);
             nativead.setVisibility(View.VISIBLE);
         }
     }

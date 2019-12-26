@@ -1,4 +1,4 @@
-package dreamforone.com.wordexcape;
+package com.vocaescape.vocaescape;
 
 import android.app.Activity;
 import android.app.AlertDialog;
