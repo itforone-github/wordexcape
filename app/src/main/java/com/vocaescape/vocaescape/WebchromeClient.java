@@ -9,11 +9,11 @@ import android.webkit.WebView;
 
 class WebchromeClient extends WebChromeClient {
     Activity activity;
-    MainActivity mainActivity;
+    WebviewActivity webviewActivity;
 
-    WebchromeClient(Activity activity, MainActivity mainActivity){
+    WebchromeClient(Activity activity, WebviewActivity webviewActivity){
         this.activity = activity;
-        this.mainActivity = mainActivity;
+        this.webviewActivity = webviewActivity;
     }
 
     WebchromeClient(){}

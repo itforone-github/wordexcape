@@ -13,12 +13,12 @@ import com.google.android.gms.ads.InterstitialAd;
 
 class Viewmanager extends WebViewClient {
     private InterstitialAd mInterstitialAd;
-    MainActivity mainActivity;
-    Viewmanager(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
+    WebviewActivity webviewActivity;
+    Viewmanager(WebviewActivity webviewActivity) {
+        this.webviewActivity = webviewActivity;
     }
-    Viewmanager(MainActivity mainActivity , InterstitialAd mInterstitialAd){
-        this.mainActivity = mainActivity;
+    Viewmanager(WebviewActivity webviewActivity , InterstitialAd mInterstitialAd){
+        this.webviewActivity = webviewActivity;
         this.mInterstitialAd = mInterstitialAd;
     }
 
@@ -30,7 +30,8 @@ class Viewmanager extends WebViewClient {
                 mInterstitialAd.show();
             } else {
                 Log.d("TAG", "The interstitial wasn't loaded yet.");
-                Toast.makeText(mainActivity.getApplicationContext(), "로딩중입니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(webviewActivity.getApplicationContext(), "로딩중입니다.", Toast.LENGTH_LONG).show();
+                return true;
             }
 
             mInterstitialAd.setAdListener(new AdListener() {
@@ -48,13 +49,5 @@ class Viewmanager extends WebViewClient {
     @Override
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
-        if(!url.equals(mainActivity.getString(R.string.index))) {
-            FrameLayout nativead =  (FrameLayout)mainActivity.findViewById(R.id.fl_adplace);
-            nativead.setVisibility(View.GONE);
-        }
-        else{
-            FrameLayout nativead =  (FrameLayout)mainActivity.findViewById(R.id.fl_adplace);
-            nativead.setVisibility(View.VISIBLE);
-        }
     }
 }

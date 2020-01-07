@@ -19,7 +19,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.vocaescape.vocaescape.SplashActivity">
+        <activity android:name="com.vocaescape.vocaescape.SplashActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity android:name="com.vocaescape.vocaescape.WebviewActivity"
+            android:screenOrientation="portrait"
+            >
+
         </activity>
 
         <meta-data

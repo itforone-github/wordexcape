@@ -33,13 +33,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.webView)   WebView webView;
+    //@BindView(R.id.webView)   WebView webView;
     @BindView(R.id.adView_banner)   AdView banner;
     @BindView(R.id.fl_adplace)    FrameLayout frameLayout;
-    @BindView(R.id.refreshlayout)   SwipeRefreshLayout refreshlayout;
+   // @BindView(R.id.refreshlayout)   SwipeRefreshLayout refreshlayout;
 //    @BindView(R.id.fullbt)   Button fulladbt;
     private long backPrssedTime = 0;
-    private InterstitialAd mInterstitialAd;
+//    private InterstitialAd mInterstitialAd;
     private UnifiedNativeAd nativeAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+/*
         refreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -76,29 +76,31 @@ public class MainActivity extends AppCompatActivity {
                     refreshlayout.setEnabled(false);
                 }
             }
-        });
+        });*/
 
-        mInterstitialAd = new InterstitialAd(getApplicationContext());
+      /*  mInterstitialAd = new InterstitialAd(getApplicationContext());
         mInterstitialAd.setAdUnitId(getString(R.string.test));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
-//        mInterstitialAd = new InterstitialAd(this);
-//        mInterstitialAd.setAdUnitId(getString(R.string.test));
-//        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-//
-//        //버튼 이벤트시 광고 노출
-//        fulladbt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (mInterstitialAd.isLoaded()) {
-//                    mInterstitialAd.show();
-//                } else {
-//                    Log.d("TAG", "The interstitial wasn't loaded yet.");
-//                    Toast.makeText(getApplicationContext(),"로딩중입니다.",Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
 
-        /*   mInterstitialAd.setAdListener(new AdListener() {
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.test));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        //버튼 이벤트시 광고 노출
+        fulladbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+                    Toast.makeText(getApplicationContext(),"로딩중입니다.",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+        .setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
                 // Load the next interstitial.
@@ -108,8 +110,6 @@ public class MainActivity extends AppCompatActivity {
 
         //배너 광고 로드
         banner.loadAd(new AdRequest.Builder().build());
-        //전면 광고 닫기시
-
 
         MobileAds.initialize(this,getString(R.string.app_id));
 
@@ -143,23 +143,11 @@ public class MainActivity extends AppCompatActivity {
 
         adLoader.loadAd(new AdRequest.Builder().build());
 
-        WebSettings settings = webView.getSettings();
-        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        settings.setJavaScriptEnabled(true);
-        webView.addJavascriptInterface(new WebviewJavainterface(),"Android");
-        webView.setWebViewClient(new Viewmanager(this, mInterstitialAd));
-        webView.setWebChromeClient(new WebchromeClient(this, this));
-        webView.loadUrl(getString(R.string.index));
 
     }
 
     @Override
     public void onBackPressed(){
-        if(webView.canGoBack()){
-//            String url = webView.copyBackForwardList().getItemAtIndex(webView.copyBackForwardList().getCurrentIndex()-1).getUrl();
-//            webView.loadUrl(url);
-            webView.goBack();
-        }else{
             long tempTime = System.currentTimeMillis();
             long intervalTime = tempTime - backPrssedTime;
             if (0 <= intervalTime && 2000 >= intervalTime){
@@ -171,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "한번 더 뒤로가기 누를시 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
             }
         }
-    }
+
 
     private void populateUnifiedNativeAdView(UnifiedNativeAd nativeAd, UnifiedNativeAdView adView) {
         // Set the media view. Media content will be automatically populated in the media view once
@@ -251,10 +239,27 @@ public class MainActivity extends AppCompatActivity {
         adView.setNativeAd(nativeAd);
     }
 
-    private class WebviewJavainterface {
-        @JavascriptInterface
-                public void temp(String id, String table) {
+    public void move_notice(View view) {
+        Intent i  = new Intent(getApplicationContext(),WebviewActivity.class);
+        i.putExtra("notice",1);
+        startActivity(i);
+    }
 
+    public void move_word(View view) {
+        String board_url = "";
+        switch(view.getId()) {
+            case R.id.bt_word1: board_url = "verb"; break;
+            case R.id.bt_word2: board_url = "noun"; break;
+            case R.id.bt_word3: board_url = "adjective"; break;
+            case R.id.bt_word4: board_url = "adverb"; break;
+            case R.id.bt_word5: board_url = "auxiliary_verb"; break;
+            case R.id.bt_word6: board_url = "pronoun"; break;
+            case R.id.bt_word7: board_url = "preposition"; break;
+            case R.id.bt_word8: board_url = "conjunction"; break;
         }
+
+        Intent i = new Intent(getApplicationContext(),WebviewActivity.class);
+        i.putExtra("board_name",board_url);
+        startActivity(i);
     }
 }
