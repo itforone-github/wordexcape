@@ -13,16 +13,18 @@
         android:usesCleartextTraffic="true"
         >
         <activity android:name="com.vocaescape.vocaescape.MainActivity">
+
+        </activity>
+        <activity android:name="com.vocaescape.vocaescape.SplashadActivity">
+
+        </activity>
+        <activity android:name="com.vocaescape.vocaescape.SplashActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <activity android:name="com.vocaescape.vocaescape.SplashActivity"
-            android:screenOrientation="portrait"
-            >
-
         </activity>
 
         <activity android:name="com.vocaescape.vocaescape.WebviewActivity"

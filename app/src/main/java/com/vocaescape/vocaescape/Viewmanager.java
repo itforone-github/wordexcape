@@ -17,31 +17,9 @@ class Viewmanager extends WebViewClient {
     Viewmanager(WebviewActivity webviewActivity) {
         this.webviewActivity = webviewActivity;
     }
-    Viewmanager(WebviewActivity webviewActivity , InterstitialAd mInterstitialAd){
-        this.webviewActivity = webviewActivity;
-        this.mInterstitialAd = mInterstitialAd;
-    }
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
-        if(url.contains("wr_id")) {
-            if (mInterstitialAd.isLoaded()) {
-                mInterstitialAd.show();
-            } else {
-                Log.d("TAG", "The interstitial wasn't loaded yet.");
-                Toast.makeText(webviewActivity.getApplicationContext(), "로딩중입니다.", Toast.LENGTH_LONG).show();
-                return true;
-            }
-
-            mInterstitialAd.setAdListener(new AdListener() {
-                @Override
-                public void onAdClosed() {
-                    // Load the next interstitial.
-                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                }
-            });
-        }
         view.loadUrl(url);
         return true;
     }

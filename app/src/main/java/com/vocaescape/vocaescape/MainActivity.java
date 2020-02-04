@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.webkit.JavascriptInterface;
@@ -47,15 +48,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        Intent splash = new Intent(MainActivity.this,SplashActivity.class);
-        startActivity(splash);
+      /*  Intent splash = new Intent(MainActivity.this,SplashActivity.class);
+        startActivity(splash);*/
 
+
+        //애드몹
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-
+        String androidId =  Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        String deviceId = MD5(androidId).toUpperCase();
+        Toast.makeText(getApplicationContext(),deviceId,Toast.LENGTH_LONG).show();
 /*
         refreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -109,11 +114,14 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
         //배너 광고 로드
+        //banner.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
         banner.loadAd(new AdRequest.Builder().build());
 
         MobileAds.initialize(this,getString(R.string.app_id));
 
-        AdLoader.Builder builder = new AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110");
+        AdLoader.Builder builder = new AdLoader.Builder(this, "ca-app-pub-3940256099942544/1044960115");
+
+
 
         builder.forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
             // OnUnifiedNativeAdLoadedListener implementation.
@@ -141,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }).build();
 
+        //adLoader.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
         adLoader.loadAd(new AdRequest.Builder().build());
 
 
@@ -159,6 +168,20 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "한번 더 뒤로가기 누를시 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
             }
         }
+
+    public String MD5(String md5) {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            byte[] array = md.digest(md5.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < array.length; ++i) {
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+            }
+            return sb.toString();
+        } catch (java.security.NoSuchAlgorithmException e) {
+        }
+        return null;
+    }
 
 
     private void populateUnifiedNativeAdView(UnifiedNativeAd nativeAd, UnifiedNativeAdView adView) {

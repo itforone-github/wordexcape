@@ -2,6 +2,7 @@ package com.vocaescape.vocaescape;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
@@ -18,11 +20,13 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import java.nio.channels.InterruptedByTimeoutException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class WebviewActivity  extends AppCompatActivity {
-    private InterstitialAd mInterstitialAd;
+    private int flg_ad =0;
     @BindView(R.id.webView)    WebView webView;
     @BindView(R.id.adView_banner2)   AdView banner2;
     @Override
@@ -46,9 +50,7 @@ public class WebviewActivity  extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        mInterstitialAd = new InterstitialAd(getApplicationContext());
-        mInterstitialAd.setAdUnitId(getString(R.string.test));
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        //banner2.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
         banner2.loadAd(new AdRequest.Builder().build());
 
         WebSettings settings = webView.getSettings();
@@ -59,7 +61,7 @@ public class WebviewActivity  extends AppCompatActivity {
 
 
         webView.addJavascriptInterface(new WebviewJavainterface(),"Android");
-        webView.setWebViewClient(new Viewmanager(this, mInterstitialAd));
+        webView.setWebViewClient(new Viewmanager(this));
         webView.setWebChromeClient(new WebchromeClient(this, this));
 
         if(i_url.isEmpty() && i_notice == 0)
@@ -73,16 +75,28 @@ public class WebviewActivity  extends AppCompatActivity {
 
     }
     @Override
-    public void onBackPressed(){
-        long tempTime = System.currentTimeMillis();
-        if (webView.canGoBack()){
+    public void onBackPressed() {
+        if (webView.canGoBack() && flg_ad < 9) {
             webView.goBack();
         }
+        else if (webView.getUrl().contains("wr_id") && flg_ad == 9) {
+                Intent i = new Intent(WebviewActivity.this, SplashadActivity.class);
+                startActivity(i);
+            }
         else {
             super.onBackPressed();
         }
+        if (flg_ad < 9) {
+            flg_ad++;
+        } else {
+            flg_ad = 0;
+        }
     }
-
+    public void move_home(View view){
+        Intent i = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(i);
+        finish();
+    }
     public void move_notice(View view) {
         Intent i  = new Intent(getApplicationContext(),WebviewActivity.class);
         i.putExtra("notice",1);
