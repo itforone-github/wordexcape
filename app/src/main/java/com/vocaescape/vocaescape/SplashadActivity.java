@@ -13,7 +13,7 @@ import com.google.android.gms.ads.InterstitialAd;
 
 public class SplashadActivity extends Activity {
     private InterstitialAd mInterstitialAd;
-    private final int SPLASH_DISPLAY_LENGTH = 1000;
+    private final int SPLASH_DISPLAY_LENGTH = 3000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +26,7 @@ public class SplashadActivity extends Activity {
             @Override
             public void run() {
                 finish();
+                overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
             }
         }, SPLASH_DISPLAY_LENGTH);
     }

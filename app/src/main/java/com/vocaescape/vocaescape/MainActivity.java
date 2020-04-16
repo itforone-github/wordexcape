@@ -4,6 +4,7 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
@@ -42,12 +43,18 @@ public class MainActivity extends AppCompatActivity {
     private long backPrssedTime = 0;
 //    private InterstitialAd mInterstitialAd;
     private UnifiedNativeAd nativeAd;
+    private ActivityManager am = ActivityManager.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        am.addActivity(this);
         ButterKnife.bind(this);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("pf_flg",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("flg", 0);
+        editor.commit();
       /*  Intent splash = new Intent(MainActivity.this,SplashActivity.class);
         startActivity(splash);*/
 
@@ -60,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         });
         String androidId =  Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         String deviceId = MD5(androidId).toUpperCase();
-        Toast.makeText(getApplicationContext(),deviceId,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),deviceId,Toast.LENGTH_LONG).show();
 /*
         refreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -118,10 +125,7 @@ public class MainActivity extends AppCompatActivity {
         banner.loadAd(new AdRequest.Builder().build());
 
         MobileAds.initialize(this,getString(R.string.app_id));
-
-        AdLoader.Builder builder = new AdLoader.Builder(this, "ca-app-pub-3940256099942544/1044960115");
-
-
+        AdLoader.Builder builder = new AdLoader.Builder(this, getString(R.string.nativead));
 
         builder.forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
             // OnUnifiedNativeAdLoadedListener implementation.
@@ -151,8 +155,6 @@ public class MainActivity extends AppCompatActivity {
 
         //adLoader.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
         adLoader.loadAd(new AdRequest.Builder().build());
-
-
     }
 
     @Override
@@ -161,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             long intervalTime = tempTime - backPrssedTime;
             if (0 <= intervalTime && 2000 >= intervalTime){
                 finish();
+                am.finishAllActivity();
             }
             else
             {
@@ -193,11 +196,11 @@ public class MainActivity extends AppCompatActivity {
         // Set other ad assets.
         adView.setHeadlineView(adView.findViewById(R.id.ad_headline));
         adView.setBodyView(adView.findViewById(R.id.ad_body));
-        adView.setCallToActionView(adView.findViewById(R.id.ad_call_to_action));
+        //adView.setCallToActionView(adView.findViewById(R.id.ad_call_to_action));
         adView.setIconView(adView.findViewById(R.id.ad_app_icon));
-        adView.setPriceView(adView.findViewById(R.id.ad_price));
+        //adView.setPriceView(adView.findViewById(R.id.ad_price));
         adView.setStarRatingView(adView.findViewById(R.id.ad_stars));
-        adView.setStoreView(adView.findViewById(R.id.ad_store));
+        //adView.setStoreView(adView.findViewById(R.id.ad_store));
         adView.setAdvertiserView(adView.findViewById(R.id.ad_advertiser));
 
         // The headline is guaranteed to be in every UnifiedNativeAd.
@@ -212,12 +215,12 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) adView.getBodyView()).setText(nativeAd.getBody());
         }
 
-        if (nativeAd.getCallToAction() == null) {
+     /*   if (nativeAd.getCallToAction() == null) {
             adView.getCallToActionView().setVisibility(View.INVISIBLE);
         } else {
             adView.getCallToActionView().setVisibility(View.VISIBLE);
             ((Button) adView.getCallToActionView()).setText(nativeAd.getCallToAction());
-        }
+        }*/
 
         if (nativeAd.getIcon() == null) {
             adView.getIconView().setVisibility(View.GONE);
@@ -226,21 +229,21 @@ public class MainActivity extends AppCompatActivity {
                     nativeAd.getIcon().getDrawable());
             adView.getIconView().setVisibility(View.VISIBLE);
         }
-
+/*
         if (nativeAd.getPrice() == null) {
             adView.getPriceView().setVisibility(View.INVISIBLE);
         } else {
             adView.getPriceView().setVisibility(View.VISIBLE);
             ((TextView) adView.getPriceView()).setText(nativeAd.getPrice());
-        }
+        }*/
 
-        if (nativeAd.getStore() == null) {
+     /*   if (nativeAd.getStore() == null) {
             adView.getStoreView().setVisibility(View.INVISIBLE);
         } else {
             adView.getStoreView().setVisibility(View.VISIBLE);
             ((TextView) adView.getStoreView()).setText(nativeAd.getStore());
         }
-
+*/
         if (nativeAd.getStarRating() == null) {
             adView.getStarRatingView().setVisibility(View.INVISIBLE);
         } else {
@@ -266,23 +269,42 @@ public class MainActivity extends AppCompatActivity {
         Intent i  = new Intent(getApplicationContext(),WebviewActivity.class);
         i.putExtra("notice",1);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
     }
 
     public void move_word(View view) {
         String board_url = "";
-        switch(view.getId()) {
-            case R.id.bt_word1: board_url = "verb"; break;
-            case R.id.bt_word2: board_url = "noun"; break;
-            case R.id.bt_word3: board_url = "adjective"; break;
-            case R.id.bt_word4: board_url = "adverb"; break;
-            case R.id.bt_word5: board_url = "auxiliary_verb"; break;
-            case R.id.bt_word6: board_url = "pronoun"; break;
-            case R.id.bt_word7: board_url = "preposition"; break;
-            case R.id.bt_word8: board_url = "conjunction"; break;
+        switch (view.getId()) {
+            case R.id.bt_word1:
+                board_url = "verb";
+                break;
+            case R.id.bt_word2:
+                board_url = "noun";
+                break;
+            case R.id.bt_word3:
+                board_url = "adjective";
+                break;
+            case R.id.bt_word4:
+                board_url = "adverb";
+                break;
+            case R.id.bt_word5:
+                board_url = "auxiliary_verb";
+                break;
+            case R.id.bt_word6:
+                board_url = "pronoun";
+                break;
+            case R.id.bt_word7:
+                board_url = "preposition";
+                break;
+            case R.id.bt_word8:
+                board_url = "conjunction";
+                break;
         }
 
-        Intent i = new Intent(getApplicationContext(),WebviewActivity.class);
-        i.putExtra("board_name",board_url);
+        Intent i = new Intent(getApplicationContext(), WebviewActivity.class);
+
+        i.putExtra("board_name", board_url);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
     }
 }

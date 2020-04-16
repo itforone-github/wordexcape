@@ -12,10 +12,19 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         >
-        <activity android:name="com.vocaescape.vocaescape.MainActivity">
+        <activity android:name="com.vocaescape.vocaescape.MainActivity"
+            android:screenOrientation="portrait"
+            >
 
         </activity>
-        <activity android:name="com.vocaescape.vocaescape.SplashadActivity">
+        <activity android:name="com.vocaescape.vocaescape.SplashadActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity android:name="com.vocaescape.vocaescape.wridActivity"
+            android:screenOrientation="portrait"
+            >
 
         </activity>
         <activity android:name="com.vocaescape.vocaescape.SplashActivity"

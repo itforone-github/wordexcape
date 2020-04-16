@@ -14,20 +14,22 @@
         android:layout_weight="0.1"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:background="#ffffff"
+        android:background="@drawable/bottom_stroke"
         android:weightSum="1">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
 <!--            <ImageView-->
+<!--                android:id="@+id/xic"-->
+<!--                android:visibility="gone"-->
 <!--                android:layout_width="30dp"-->
 <!--                android:layout_height="30dp"-->
 <!--                android:layout_marginLeft="10dp"-->
 <!--                android:scaleType="fitXY"-->
-<!--                android:onClick="move_notice"-->
+<!--                android:onClick="move_main"-->
 <!--                android:layout_gravity="center_vertical|left"-->
-<!--                android:src="@drawable/icon_cate"-->
+<!--                android:src="@drawable/close"-->
 <!--                />-->
             <ImageView
                 android:layout_width="wrap_content"
@@ -46,12 +48,21 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.75"
+        android:background="#fff"
+        />
+    <WebView
+        android:id="@+id/webView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.75"
+        android:background="#fff"
+        android:visibility="gone"
         />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/bottom_stroke"
+        android:background="@drawable/upbot_stroke"
         android:layout_weight="0.03">
 
         <TextView
@@ -71,7 +82,5 @@
         android:layout_centerHorizontal="true"
         android:layout_weight="0.12"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-8666062848331336/4843904391"></com.google.android.gms.ads.AdView>
-
-
+        ads:adUnitId="@string/banner"></com.google.android.gms.ads.AdView>
 </LinearLayout>
