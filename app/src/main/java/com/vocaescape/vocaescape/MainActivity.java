@@ -2,17 +2,11 @@ package com.vocaescape.vocaescape;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -22,7 +16,6 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.formats.MediaView;
 
@@ -30,6 +23,7 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.vocaescape.vocaescape.menu.MenuActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -125,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         banner.loadAd(new AdRequest.Builder().build());
 
         MobileAds.initialize(this,getString(R.string.app_id));
-        AdLoader.Builder builder = new AdLoader.Builder(this, getString(R.string.nativead));
+        AdLoader.Builder builder = new AdLoader.Builder(this, getString(R.string.nativead_test));
 
         builder.forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
             // OnUnifiedNativeAdLoadedListener implementation.
@@ -266,8 +260,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void move_notice(View view) {
-        Intent i  = new Intent(getApplicationContext(),WebviewActivity.class);
-        i.putExtra("notice",1);
+        Intent i  = new Intent(getApplicationContext(), MenuActivity.class);
+        //i.putExtra("notice",1);
         startActivity(i);
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
     }

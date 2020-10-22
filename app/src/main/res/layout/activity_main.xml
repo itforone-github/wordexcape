@@ -35,7 +35,26 @@
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:src="@drawable/logo"
                 />
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="right|center"
+                >
+ri            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@null"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:src="@android:drawable/ic_menu_search" />
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@null"
+                android:scaleType="fitStart"
+                android:src="@drawable/settings_icon" />
+            </LinearLayout>
         </FrameLayout>
     </LinearLayout>
 
@@ -53,13 +72,21 @@
 <!--        android:layout_weight="0.02"-->
 <!--        android:background="#fff"-->
 <!--        />-->
+
+    <!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="0.02"-->
+<!--        android:background="#fff"-->
+<!--        />-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.31"
+        android:background="@drawable/upbot_stroke"
         android:orientation="vertical"
         android:padding="10dp"
-        android:background="@drawable/upbot_stroke"
         android:weightSum="1">
 
         <LinearLayout
@@ -67,9 +94,9 @@
             android:layout_height="0dp"
             android:layout_marginTop="15dp"
             android:layout_weight="0.5"
+            android:orientation="horizontal"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:orientation="horizontal"
             android:weightSum="1">
 
             <Button
@@ -79,12 +106,8 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="0.25"
-                android:background="@drawable/radius_gray"
-                android:text="동    사"
-                android:textSize="17dp"
-                android:onClick="move_word"
-                android:textColor="#ffffff"
-                />
+                android:background="@drawable/micon01"
+                android:onClick="move_word" />
 
             <Button
                 android:id="@+id/bt_word2"
@@ -93,11 +116,8 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="0.25"
-                android:background="@drawable/radius_black"
-                android:text="명    사"
-                android:textSize="17dp"
-                android:onClick="move_word"
-                android:textColor="#ffffff" />
+                android:background="@drawable/micon02"
+                android:onClick="move_word" />
 
             <Button
                 android:id="@+id/bt_word3"
@@ -106,11 +126,8 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="0.25"
-                android:background="@drawable/radius_gray"
-                android:text="형용사"
-                android:textSize="17dp"
-                android:onClick="move_word"
-                android:textColor="#ffffff" />
+                android:background="@drawable/micon03"
+                android:onClick="move_word" />
 
             <Button
                 android:id="@+id/bt_word4"
@@ -118,11 +135,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="0.25"
-                android:background="@drawable/radius_black"
-                android:text="부    사"
-                android:textSize="17dp"
-                android:onClick="move_word"
-                android:textColor="#ffffff" />
+                android:background="@drawable/micon04"
+                android:onClick="move_word" />
 
         </LinearLayout>
 
@@ -131,9 +145,9 @@
             android:layout_height="0dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="0.5"
+            android:orientation="horizontal"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:orientation="horizontal"
             android:weightSum="1">
 
             <Button
@@ -142,11 +156,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
                 android:layout_weight="0.25"
-                android:background="@drawable/radius_black"
-                android:text="조동사"
-                android:textSize="17dp"
-                android:onClick="move_word"
-                android:textColor="#ffffff" />
+                android:background="@drawable/micon05"
+                android:onClick="move_word" />
 
             <Button
                 android:id="@+id/bt_word6"
@@ -154,11 +165,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
                 android:layout_weight="0.25"
-                android:background="@drawable/radius_gray"
-                android:text="대명사"
-                android:textSize="17dp"
+                android:background="@drawable/micon06"
                 android:onClick="move_word"
-                android:textColor="#ffffff" />
+                android:textSize="17dp" />
 
             <Button
                 android:id="@+id/bt_word7"
@@ -166,31 +175,21 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
                 android:layout_weight="0.25"
-                android:background="@drawable/radius_black"
-                android:text="전치사"
-                android:textSize="17dp"
+                android:background="@drawable/micon07"
                 android:onClick="move_word"
-                android:textColor="#ffffff" />
+                android:textSize="17dp" />
 
             <Button
                 android:id="@+id/bt_word8"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
-                android:background="@drawable/radius_gray"
-                android:text="접속사"
-                android:textSize="17dp"
+                android:background="@drawable/micon08"
+
                 android:onClick="move_word"
-                android:textColor="#ffffff" />
+                android:textSize="17dp" />
         </LinearLayout>
     </LinearLayout>
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_weight="0.02"-->
-<!--        android:background="#fff"-->
-<!--        />-->
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -204,7 +203,7 @@
             android:gravity="center_vertical"
             android:layout_gravity="center_horizontal"
             android:textColor="#225bac"
-            android:text="구글 광고 (Ad Mob by Google)" />
+            android:text="구글광고 (Ad Mob by Google)" />
     </FrameLayout>
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -215,7 +214,7 @@
         android:layout_centerHorizontal="true"
         android:layout_weight="0.12"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/banner"></com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/banner_test"></com.google.android.gms.ads.AdView>
 
 </LinearLayout>
 

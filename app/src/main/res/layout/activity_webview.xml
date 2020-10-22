@@ -39,6 +39,28 @@
                 android:src="@drawable/logo"
                 android:onClick="move_home"
                 />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="right|center"
+                >
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:layout_marginRight="10dp"
+                    android:src="@android:drawable/ic_menu_search" />
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/settings_icon" />
+
+
+            </LinearLayout>
 
         </FrameLayout>
     </LinearLayout>
@@ -49,14 +71,6 @@
         android:layout_height="0dp"
         android:layout_weight="0.75"
         android:background="#fff"
-        />
-    <WebView
-        android:id="@+id/webView2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.75"
-        android:background="#fff"
-        android:visibility="gone"
         />
 
     <FrameLayout
@@ -71,7 +85,7 @@
             android:gravity="center_vertical"
             android:layout_gravity="center_horizontal"
             android:textColor="#225bac"
-            android:text="구글 광고 (Ad Mob by Google)" />
+            android:text="구글광고 (Ad Mob by Google)" />
     </FrameLayout>
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -82,5 +96,5 @@
         android:layout_centerHorizontal="true"
         android:layout_weight="0.12"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/banner"></com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/banner_test"></com.google.android.gms.ads.AdView>
 </LinearLayout>

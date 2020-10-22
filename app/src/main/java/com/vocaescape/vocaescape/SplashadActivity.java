@@ -19,7 +19,7 @@ public class SplashadActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashad);
         mInterstitialAd = new InterstitialAd(getApplicationContext());
-        mInterstitialAd.setAdUnitId(getString(R.string.full));
+        mInterstitialAd.setAdUnitId(getString(R.string.test));
         //mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         new Handler().postDelayed(new Runnable() {

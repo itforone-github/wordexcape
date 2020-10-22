@@ -17,6 +17,41 @@
             >
 
         </activity>
+        <activity android:name="com.vocaescape.vocaescape.menu.MenuActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity android:name="com.vocaescape.vocaescape.menu.MenuadActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity android:name="com.vocaescape.vocaescape.menu.MenuRightActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity android:name="com.vocaescape.vocaescape.menu.MenuUpdateActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity android:name="com.vocaescape.vocaescape.menu.MenueffectActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity android:name="com.vocaescape.vocaescape.menu.MenuintroduceActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity android:name="com.vocaescape.vocaescape.menu.MenuPolicyActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
         <activity android:name="com.vocaescape.vocaescape.SplashadActivity"
             android:screenOrientation="portrait"
             >
@@ -27,6 +62,7 @@
             >
 
         </activity>
+
         <activity android:name="com.vocaescape.vocaescape.SplashActivity"
             android:screenOrientation="portrait"
             >

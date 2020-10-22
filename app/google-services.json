@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "371558195417",
+    "firebase_url": "https://vocaescape-27356.firebaseio.com",
+    "project_id": "vocaescape-27356",
+    "storage_bucket": "vocaescape-27356.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371558195417:android:cf0adb3096d3e258985ec8",
+        "android_client_info": {
+          "package_name": "com.vocaescape.vocaescape"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371558195417-l9s96ut48bdrijo553jbpts5v8looh7e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vocaescape.vocaescape",
+            "certificate_hash": "53ad91514c4f08dfc465bf80b83a03e67b3220e0"
+          }
+        },
+        {
+          "client_id": "371558195417-om33kpro0hmqfliume9queuob41poo9k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXs5gHu3yL2nwtQJjV0NEj5_pORvnENS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371558195417-om33kpro0hmqfliume9queuob41poo9k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-8666062848331336~1096231071"
+    }
+  ],
+  "configuration_version": "1"
+}
