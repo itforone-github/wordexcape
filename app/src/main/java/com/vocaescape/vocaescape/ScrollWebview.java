@@ -5,16 +5,16 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.webkit.WebView;
 
-public class scrollWebview extends WebView {
-    public scrollWebview(Context context) {
+public class ScrollWebview extends WebView {
+    public ScrollWebview(Context context) {
         super(context);
     }
 
-    public scrollWebview(Context context, AttributeSet attrs) {
+    public ScrollWebview(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public scrollWebview(Context context, AttributeSet attrs, int defStyle) {
+    public ScrollWebview(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 

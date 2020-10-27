@@ -1,41 +1,35 @@
 package com.vocaescape.vocaescape;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebBackForwardList;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ImageView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
-import java.nio.channels.InterruptedByTimeoutException;
-import java.util.concurrent.ThreadPoolExecutor;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.vocaescape.vocaescape.SettingActivity.VIEW_REFRESH;
+import static com.vocaescape.vocaescape.SettingTextActivity.viewtextSize;
+
 public class WebviewActivity  extends AppCompatActivity {
-    public int flg_ad =0;
+
     @BindView(R.id.webView)    WebView webView;
     @BindView(R.id.adView_banner2)   AdView banner2;
     //@BindView(R.id.xic)    ImageView xic;
     private ActivityManager am = ActivityManager.getInstance();
     String i_url="";
+    WebSettings settings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,10 +55,11 @@ public class WebviewActivity  extends AppCompatActivity {
         //banner2.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
         banner2.loadAd(new AdRequest.Builder().build());
 
-        WebSettings settings = webView.getSettings();
+        settings = webView.getSettings();
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
+        settings.setTextZoom(viewtextSize*20+100);
 
         webView.addJavascriptInterface(new WebviewJavainterface(),"Android");
         webView.setWebViewClient(new Viewmanager(this));
@@ -89,6 +84,18 @@ public class WebviewActivity  extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case VIEW_REFRESH:
+                settings.setTextZoom(viewtextSize*20+100);
+                break;
+
+        }
+    }
+
     @Override
     public void onBackPressed() {
         if (webView.canGoBack()) {
@@ -113,12 +120,11 @@ public class WebviewActivity  extends AppCompatActivity {
         finish();
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
     }
-    public void move_notice(View view) {
-        Intent i  = new Intent(getApplicationContext(),WebviewActivity.class);
-        i.putExtra("notice",1);
-        startActivity(i);
-        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
-        finish();
+
+    public void move_setting(View view) {
+        Intent i  = new Intent(getApplicationContext(), SettingActivity.class);
+        startActivityForResult(i,VIEW_REFRESH);
+        //i.putExtra("notice",1);
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
     }
 

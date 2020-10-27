@@ -23,7 +23,7 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.vocaescape.vocaescape.menu.MenuActivity;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -266,8 +266,17 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
     }
 
-    public void move_word(View view) {
+    public void move_setting(View view) {
+        Intent i  = new Intent(getApplicationContext(), SettingActivity.class);
+        //i.putExtra("notice",1);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
+    }
+
+    public void move_word(View view){
+
         String board_url = "";
+
         switch (view.getId()) {
             case R.id.bt_word1:
                 board_url = "verb";

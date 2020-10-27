@@ -53,6 +53,7 @@ ri            <ImageButton
                 android:layout_height="30dp"
                 android:background="@null"
                 android:scaleType="fitStart"
+                android:onClick="move_setting"
                 android:src="@drawable/settings_icon" />
             </LinearLayout>
         </FrameLayout>

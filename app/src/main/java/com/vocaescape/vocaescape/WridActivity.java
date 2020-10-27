@@ -3,12 +3,14 @@ package com.vocaescape.vocaescape;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebBackForwardList;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.ads.AdRequest;
@@ -17,12 +19,16 @@ import com.google.android.gms.ads.AdView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class wridActivity extends AppCompatActivity {
+import static com.vocaescape.vocaescape.SettingActivity.VIEW_REFRESH;
+import static com.vocaescape.vocaescape.SettingTextActivity.viewtextSize;
+
+public class WridActivity extends AppCompatActivity {
     private ActivityManager am = ActivityManager.getInstance();
     @BindView(R.id.webView)  WebView webView;
     @BindView(R.id.adView_banner2)
     AdView banner2;
     int flg_ad =0;
+    WebSettings settings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +51,7 @@ public class wridActivity extends AppCompatActivity {
         String url = getIntent().getStringExtra("url");
 
 
-        WebSettings settings = webView.getSettings();
+        settings = webView.getSettings();
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
@@ -53,6 +59,7 @@ public class wridActivity extends AppCompatActivity {
         webView.addJavascriptInterface(new WebviewJavainterface(),"Android");
         webView.setWebViewClient(new Viewmanager(this));
         webView.setWebChromeClient(new WebchromeClient(this, this));
+        settings.setTextZoom(viewtextSize*20+100);
 
         if(url.isEmpty() == false)
         webView.loadUrl(url);
@@ -65,7 +72,7 @@ public class wridActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(flg_ad==9) {
+        if(flg_ad==4) {
             Intent i = new Intent(this, SplashadActivity.class);
             startActivity(i);
             overridePendingTransition(R.anim.slide_inleft, R.anim.slide_outright);
@@ -78,11 +85,37 @@ public class wridActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case VIEW_REFRESH:
+                settings.setTextZoom(viewtextSize*20+100);
+                break;
+        }
+    }
+
     private class WebviewJavainterface {
         @JavascriptInterface
         public void temp(String id, String table) {
 
         }
     }
+
+    public void move_setting(View view) {
+        Intent i  = new Intent(getApplicationContext(), SettingActivity.class);
+        startActivityForResult(i,VIEW_REFRESH);
+        //i.putExtra("notice",1);
+        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
+    }
+
+    public void move_home(View view){
+        Intent i = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
+        finish();
+        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
+    }
+
 
 }

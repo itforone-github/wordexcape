@@ -9,4 +9,12 @@
     <string name="nativead_test">ca-app-pub-3940256099942544/1044960115</string>
     <string name="full">ca-app-pub-8666062848331336/6759621297</string>
     <string name="test">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="menu1">https://www.naver.com?id=01</string>
+    <string name="menu2">https://www.naver.com?id=02</string>
+    <string name="menu3">https://www.naver.com?id=03</string>
+    <string name="menu4">https://www.naver.com?id=04</string>
+    <string name="menu5">https://www.naver.com?id=05</string>
+    <string name="menu6">https://www.naver.com?id=06</string>
+
+
 </resources>

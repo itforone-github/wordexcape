@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vocaescape.vocaescape">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -10,77 +10,40 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        >
-        <activity android:name="com.vocaescape.vocaescape.MainActivity"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
-        <activity android:name="com.vocaescape.vocaescape.menu.MenuActivity"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
-        <activity android:name="com.vocaescape.vocaescape.menu.MenuadActivity"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
-        <activity android:name="com.vocaescape.vocaescape.menu.MenuRightActivity"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
-        <activity android:name="com.vocaescape.vocaescape.menu.MenuUpdateActivity"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
-        <activity android:name="com.vocaescape.vocaescape.menu.MenueffectActivity"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
-        <activity android:name="com.vocaescape.vocaescape.menu.MenuintroduceActivity"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
-        <activity android:name="com.vocaescape.vocaescape.menu.MenuPolicyActivity"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
-        <activity android:name="com.vocaescape.vocaescape.SplashadActivity"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
-        <activity android:name="com.vocaescape.vocaescape.wridActivity"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
-
-        <activity android:name="com.vocaescape.vocaescape.SplashActivity"
-            android:screenOrientation="portrait"
-            >
+        android:usesCleartextTraffic="true">
+        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".SettingTextActivity"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".MenuActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".MenuWebviewActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".SplashadActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".WridActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.vocaescape.vocaescape.WebviewActivity"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
+        <activity
+            android:name=".WebviewActivity"
+            android:screenOrientation="portrait"></activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/app_id"/>
+            android:value="@string/app_id" />
     </application>
 
 </manifest>
