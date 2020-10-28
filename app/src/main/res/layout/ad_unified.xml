@@ -82,10 +82,13 @@
 
                 </LinearLayout>
             </LinearLayout>
-
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
@@ -138,7 +141,17 @@
 <!--                        android:gravity="center"-->
 <!--                        android:textSize="12sp" />-->
 <!--                </LinearLayout>-->
-            </LinearLayout>
+                        </LinearLayout>
+            <Button
+                android:id="@+id/ad_call_to_action"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:text="시작하기"
+                android:textSize="10dp"
+                android:backgroundTint="@color/yellow"
+                />
+                </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.gms.ads.formats.UnifiedNativeAdView>

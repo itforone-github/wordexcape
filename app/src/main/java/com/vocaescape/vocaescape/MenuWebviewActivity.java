@@ -19,8 +19,6 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.vocaescape.vocaescape.SettingTextActivity.viewtextSize;
-
 public class MenuWebviewActivity extends AppCompatActivity {
     public int flg_ad =0;
     @BindView(R.id.menu_webView)    WebView webView;

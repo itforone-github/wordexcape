@@ -23,6 +23,7 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.vocaescape.vocaescape.setting.SettingActivity;
 
 
 import butterknife.BindView;
@@ -151,11 +152,16 @@ public class MainActivity extends AppCompatActivity {
         adLoader.loadAd(new AdRequest.Builder().build());
     }
 
+
+
     @Override
     public void onBackPressed(){
             long tempTime = System.currentTimeMillis();
             long intervalTime = tempTime - backPrssedTime;
             if (0 <= intervalTime && 2000 >= intervalTime){
+                Intent i = new Intent(MainActivity.this, SplashEndActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
                 finish();
                 am.finishAllActivity();
             }
@@ -165,6 +171,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "한번 더 뒤로가기 누를시 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
             }
         }
+
+
 
     public String MD5(String md5) {
         try {
@@ -186,7 +194,6 @@ public class MainActivity extends AppCompatActivity {
         // adView.setNativeAd() is called.
         MediaView mediaView = adView.findViewById(R.id.ad_media);
         adView.setMediaView(mediaView);
-
         // Set other ad assets.
         adView.setHeadlineView(adView.findViewById(R.id.ad_headline));
         adView.setBodyView(adView.findViewById(R.id.ad_body));
@@ -196,10 +203,9 @@ public class MainActivity extends AppCompatActivity {
         adView.setStarRatingView(adView.findViewById(R.id.ad_stars));
         //adView.setStoreView(adView.findViewById(R.id.ad_store));
         adView.setAdvertiserView(adView.findViewById(R.id.ad_advertiser));
-
+        adView.setCallToActionView(adView.findViewById(R.id.ad_call_to_action));
         // The headline is guaranteed to be in every UnifiedNativeAd.
         ((TextView) adView.getHeadlineView()).setText(nativeAd.getHeadline());
-
         // These assets aren't guaranteed to be in every UnifiedNativeAd, so it's important to
         // check before trying to display them.
         if (nativeAd.getBody() == null) {

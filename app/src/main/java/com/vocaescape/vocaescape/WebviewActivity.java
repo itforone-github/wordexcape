@@ -15,12 +15,13 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.vocaescape.vocaescape.setting.SettingActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.vocaescape.vocaescape.SettingActivity.VIEW_REFRESH;
-import static com.vocaescape.vocaescape.SettingTextActivity.viewtextSize;
+import static com.vocaescape.vocaescape.setting.SettingActivity.VIEW_REFRESH;
+import static com.vocaescape.vocaescape.setting.SettingTextActivity.viewtextSize;
 
 public class WebviewActivity  extends AppCompatActivity {
 

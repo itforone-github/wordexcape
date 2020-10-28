@@ -5,22 +5,21 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebBackForwardList;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.vocaescape.vocaescape.setting.SettingActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.vocaescape.vocaescape.SettingActivity.VIEW_REFRESH;
-import static com.vocaescape.vocaescape.SettingTextActivity.viewtextSize;
+import static com.vocaescape.vocaescape.setting.SettingActivity.VIEW_REFRESH;
+import static com.vocaescape.vocaescape.setting.SettingTextActivity.viewtextSize;
 
 public class WridActivity extends AppCompatActivity {
     private ActivityManager am = ActivityManager.getInstance();

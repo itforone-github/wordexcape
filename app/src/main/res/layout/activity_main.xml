@@ -67,6 +67,7 @@ ri            <ImageButton
         android:background="#fff"
         />
 
+
 <!--    <LinearLayout-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="0dp"-->
@@ -198,13 +199,26 @@ ri            <ImageButton
         android:background="@drawable/bottom_stroke"
         android:layout_weight="0.03">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:layout_gravity="center_horizontal"
-            android:textColor="#225bac"
-            android:text="구글광고 (Ad Mob by Google)" />
+            android:textColor="#909090"
+            android:layout_marginRight="5dp"
+            android:text="구글광고" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="#caa97f"
+            android:text="(Ad Mob by Google)" />
+        </LinearLayout>
+
     </FrameLayout>
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"

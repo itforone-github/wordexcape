@@ -11,8 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SettingActivity"></activity>
-        <activity android:name=".SettingTextActivity"></activity>
+        <activity android:name=".setting.SettingActivity"></activity>
+        <activity android:name=".setting.SettingTextActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"></activity>
@@ -37,6 +37,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SplashEndActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".WebviewActivity"
             android:screenOrientation="portrait"></activity>

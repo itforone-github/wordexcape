@@ -6,11 +6,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.google.android.gms.ads.InterstitialAd;
 
-import static com.vocaescape.vocaescape.SettingActivity.VIEW_REFRESH;
+import static com.vocaescape.vocaescape.setting.SettingActivity.VIEW_REFRESH;
 
 
 class Viewmanager extends WebViewClient {
+
     private InterstitialAd mInterstitialAd;
+
     Activity viewActivity;
     Viewmanager(Activity viewActivity) {
         this.viewActivity = viewActivity;
