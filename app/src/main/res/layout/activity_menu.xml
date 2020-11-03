@@ -268,13 +268,25 @@
         android:background="@drawable/upbot_stroke"
         android:layout_weight="0.03">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
             android:layout_gravity="center_horizontal"
-            android:textColor="#225bac"
-            android:text="구글광고 (Ad Mob by Google)" />
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="#909090"
+                android:layout_marginRight="5dp"
+                android:text="구글광고" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="#caa97f"
+                android:text="(Ad Mob by Google)" />
+        </LinearLayout>
 
     </FrameLayout>
 

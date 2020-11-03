@@ -7,6 +7,7 @@ import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,8 +25,9 @@ import static com.vocaescape.vocaescape.setting.SettingTextActivity.viewtextSize
 public class WridActivity extends AppCompatActivity {
     private ActivityManager am = ActivityManager.getInstance();
     @BindView(R.id.webView)  WebView webView;
-    @BindView(R.id.adView_banner2)
-    AdView banner2;
+    @BindView(R.id.adView_banner2)    AdView banner2;
+    @BindView(R.id.searchwv_bt)    ImageButton searchwv_bt;
+
     int flg_ad =0;
     WebSettings settings;
     @Override
@@ -36,6 +38,8 @@ public class WridActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         banner2.loadAd(new AdRequest.Builder().build());
 
+
+        searchwv_bt.setVisibility(View.GONE);
 
         SharedPreferences sf = getSharedPreferences("pf_flg",MODE_PRIVATE);
         flg_ad = sf.getInt("flg",0);
@@ -103,6 +107,14 @@ public class WridActivity extends AppCompatActivity {
 
     public void move_setting(View view) {
         Intent i  = new Intent(getApplicationContext(), SettingActivity.class);
+        startActivityForResult(i,VIEW_REFRESH);
+        //i.putExtra("notice",1);
+        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
+    }
+
+    public void move_search(View view) {
+        Intent i  = new Intent(getApplicationContext(), WebviewActivity.class);
+        i.putExtra("board_name", "search");
         startActivityForResult(i,VIEW_REFRESH);
         //i.putExtra("notice",1);
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);

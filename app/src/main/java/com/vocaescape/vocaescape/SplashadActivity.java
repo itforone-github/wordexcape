@@ -32,6 +32,11 @@ public class SplashadActivity extends Activity {
     }
 
     @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (mInterstitialAd.isLoaded()) {

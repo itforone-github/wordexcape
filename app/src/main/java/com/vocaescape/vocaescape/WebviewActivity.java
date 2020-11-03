@@ -46,7 +46,6 @@ public class WebviewActivity  extends AppCompatActivity {
         else
             i_url= "";
 
-        int i_notice = getIntent().getIntExtra("notice",0);
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -66,13 +65,11 @@ public class WebviewActivity  extends AppCompatActivity {
         webView.setWebViewClient(new Viewmanager(this));
         webView.setWebChromeClient(new WebchromeClient(this, this));
 
-        if(i_url.isEmpty() && i_notice == 0) {
-            webView.loadUrl(getString(R.string.index));
+
+        if(!i_url.isEmpty() && i_url.equals("search")) {
+            webView.loadUrl(getString(R.string.bbs) + "wordsearch.php");
         }
-        else if(i_notice==1) {
-            webView.loadUrl(getString(R.string.index));
-        }
-        else {
+        else{
             webView.loadUrl(getString(R.string.board) + i_url);
         }
     }
@@ -124,6 +121,13 @@ public class WebviewActivity  extends AppCompatActivity {
 
     public void move_setting(View view) {
         Intent i  = new Intent(getApplicationContext(), SettingActivity.class);
+        startActivityForResult(i,VIEW_REFRESH);
+        //i.putExtra("notice",1);
+        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
+    }
+    public void move_search(View view) {
+        Intent i  = new Intent(getApplicationContext(), WebviewActivity.class);
+        i.putExtra("board_name", "search");
         startActivityForResult(i,VIEW_REFRESH);
         //i.putExtra("notice",1);
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);

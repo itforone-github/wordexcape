@@ -20,11 +20,12 @@
             android:padding="5dp"
             >
             <ImageView
+                android:id="@+id/menu_bt"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
                 android:scaleType="fitXY"
-                android:onClick="move_notice"
+                android:onClick="move_event"
                 android:layout_gravity="center_vertical|left"
                 android:src="@drawable/icon_cate"
                 />
@@ -41,19 +42,22 @@
                 android:orientation="horizontal"
                 android:layout_gravity="right|center"
                 >
-ri            <ImageButton
+            <ImageButton
+                android:id="@+id/search_bt"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@null"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
+                android:onClick="move_event"
                 android:src="@android:drawable/ic_menu_search" />
             <ImageButton
+                android:id="@+id/setting_bt"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@null"
                 android:scaleType="fitStart"
-                android:onClick="move_setting"
+                android:onClick="move_event"
                 android:src="@drawable/settings_icon" />
             </LinearLayout>
         </FrameLayout>
@@ -109,7 +113,7 @@ ri            <ImageButton
                 android:layout_marginBottom="5dp"
                 android:layout_weight="0.25"
                 android:background="@drawable/micon01"
-                android:onClick="move_word" />
+                android:onClick="move_event" />
 
             <Button
                 android:id="@+id/bt_word2"
@@ -119,7 +123,7 @@ ri            <ImageButton
                 android:layout_marginBottom="5dp"
                 android:layout_weight="0.25"
                 android:background="@drawable/micon02"
-                android:onClick="move_word" />
+                android:onClick="move_event" />
 
             <Button
                 android:id="@+id/bt_word3"
@@ -129,7 +133,7 @@ ri            <ImageButton
                 android:layout_marginBottom="5dp"
                 android:layout_weight="0.25"
                 android:background="@drawable/micon03"
-                android:onClick="move_word" />
+                android:onClick="move_event" />
 
             <Button
                 android:id="@+id/bt_word4"
@@ -138,7 +142,7 @@ ri            <ImageButton
                 android:layout_marginBottom="5dp"
                 android:layout_weight="0.25"
                 android:background="@drawable/micon04"
-                android:onClick="move_word" />
+                android:onClick="move_event" />
 
         </LinearLayout>
 
@@ -159,7 +163,7 @@ ri            <ImageButton
                 android:layout_marginRight="5dp"
                 android:layout_weight="0.25"
                 android:background="@drawable/micon05"
-                android:onClick="move_word" />
+                android:onClick="move_event" />
 
             <Button
                 android:id="@+id/bt_word6"
@@ -168,7 +172,7 @@ ri            <ImageButton
                 android:layout_marginRight="5dp"
                 android:layout_weight="0.25"
                 android:background="@drawable/micon06"
-                android:onClick="move_word"
+                android:onClick="move_event"
                 android:textSize="17dp" />
 
             <Button
@@ -178,7 +182,7 @@ ri            <ImageButton
                 android:layout_marginRight="5dp"
                 android:layout_weight="0.25"
                 android:background="@drawable/micon07"
-                android:onClick="move_word"
+                android:onClick="move_event"
                 android:textSize="17dp" />
 
             <Button
@@ -188,7 +192,7 @@ ri            <ImageButton
                 android:layout_weight="0.25"
                 android:background="@drawable/micon08"
 
-                android:onClick="move_word"
+                android:onClick="move_event"
                 android:textSize="17dp" />
         </LinearLayout>
     </LinearLayout>

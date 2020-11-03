@@ -2,6 +2,7 @@
     <string name="app_name">단어탈출</string>
     <string name="index">http://vocaescape.com/</string>
     <string name="board">http://vocaescape.com/bbs/board.php?bo_table=</string>
+    <string name="bbs">http://vocaescape.com/bbs/</string>
     <string name="app_id">ca-app-pub-8666062848331336~1096231071</string>
     <string name="banner">ca-app-pub-8666062848331336/4843904391</string>
     <string name="banner_test">ca-app-pub-3940256099942544/6300978111</string>

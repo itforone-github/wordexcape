@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -265,54 +266,72 @@ public class MainActivity extends AppCompatActivity {
         adView.setNativeAd(nativeAd);
     }
 
-    public void move_notice(View view) {
+    /*public void move_notice(View view) {
         Intent i  = new Intent(getApplicationContext(), MenuActivity.class);
         //i.putExtra("notice",1);
         startActivity(i);
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
-    }
+    }*/
 
-    public void move_setting(View view) {
-        Intent i  = new Intent(getApplicationContext(), SettingActivity.class);
-        //i.putExtra("notice",1);
-        startActivity(i);
-        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
-    }
-
-    public void move_word(View view){
+    public void move_event(View view){
 
         String board_url = "";
-
+        Intent i;
         switch (view.getId()) {
+            case R.id.menu_bt:
+                i  = new Intent(getApplicationContext(), MenuActivity.class);
+                break;
+            case R.id.setting_bt:
+                i  = new Intent(getApplicationContext(), SettingActivity.class);
+                break;
+            case R.id.search_bt:
+                i  = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("board_name", "search");
+                break;
             case R.id.bt_word1:
                 board_url = "verb";
+                i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("board_name", board_url);
                 break;
             case R.id.bt_word2:
                 board_url = "noun";
+                i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("board_name", board_url);
                 break;
             case R.id.bt_word3:
                 board_url = "adjective";
+                i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("board_name", board_url);
                 break;
             case R.id.bt_word4:
                 board_url = "adverb";
+                i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("board_name", board_url);
                 break;
             case R.id.bt_word5:
                 board_url = "auxiliary_verb";
+                i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("board_name", board_url);
                 break;
             case R.id.bt_word6:
                 board_url = "pronoun";
+                i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("board_name", board_url);
                 break;
             case R.id.bt_word7:
                 board_url = "preposition";
+                i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("board_name", board_url);
                 break;
             case R.id.bt_word8:
                 board_url = "conjunction";
+                i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("board_name", board_url);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + view.getId());
         }
 
-        Intent i = new Intent(getApplicationContext(), WebviewActivity.class);
-
-        i.putExtra("board_name", board_url);
         startActivity(i);
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
     }
