@@ -191,7 +191,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
                 android:background="@drawable/micon08"
-
                 android:onClick="move_event"
                 android:textSize="17dp" />
         </LinearLayout>

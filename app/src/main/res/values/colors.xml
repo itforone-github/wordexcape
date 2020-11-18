@@ -6,4 +6,7 @@
     <color name="gray">#AAAAAA</color>
     <color name="black">#000000</color>
     <color name="yellow">#ffff00</color>
+    <color name="ad_backcolor">#fafafa</color>
+
+
 </resources>

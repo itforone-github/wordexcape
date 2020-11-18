@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 public class MenuActivity extends AppCompatActivity {
     private ActivityManager am = ActivityManager.getInstance();
     @BindView(R.id.adView_banner3)    AdView banner;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 

@@ -14,7 +14,6 @@
         android:layout_weight="0.1"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:background="@drawable/bottom_stroke"
         android:weightSum="1">
         <FrameLayout
             android:layout_width="match_parent"
@@ -47,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.75"
-        android:background="#fff"
+        android:background="@drawable/upbot_stroke"
         android:weightSum="6"
         android:orientation="vertical"
         >
@@ -127,7 +126,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/upbot_stroke"
+        android:background="@drawable/bottom_stroke"
         android:layout_weight="0.03">
 
         <LinearLayout
