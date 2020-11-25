@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 //    private InterstitialAd mInterstitialAd;
     private UnifiedNativeAd nativeAd;
     private ActivityManager am = ActivityManager.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -283,7 +284,8 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra("url",getString(R.string.all_menu));
                 break;
             case R.id.setting_bt:
-                i  = new Intent(getApplicationContext(), SettingActivity.class);
+                i  = new Intent(getApplicationContext(), MenuWebviewActivity.class);
+                i.putExtra("url",getString(R.string.setting));
                 break;
             case R.id.search_bt:
                 i  = new Intent(getApplicationContext(), WebviewActivity.class);

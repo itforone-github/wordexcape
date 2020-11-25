@@ -20,7 +20,7 @@ import com.vocaescape.vocaescape.setting.SettingActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.vocaescape.vocaescape.setting.SettingActivity.VIEW_REFRESH;
+import static com.vocaescape.vocaescape.MenuWebviewActivity.VIEW_REFRESH;
 import static com.vocaescape.vocaescape.setting.SettingTextActivity.viewtextSize;
 
 public class WebviewActivity  extends AppCompatActivity {

@@ -11,6 +11,7 @@
     <string name="full">ca-app-pub-8666062848331336/6759621297</string>
     <string name="test">ca-app-pub-3940256099942544/1033173712</string>
     <string name="all_menu">http://vocaescape.com/bbs/menu_list.php</string>
+    <string name="setting">http://vocaescape.com/bbs/set_menu.php</string>
     <string name="menu1">https://www.naver.com?id=01</string>
     <string name="menu2">https://www.naver.com?id=02</string>
     <string name="menu3">https://www.naver.com?id=03</string>
