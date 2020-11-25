@@ -2,8 +2,10 @@ package com.vocaescape.vocaescape;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebBackForwardList;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -15,6 +17,8 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,11 +47,11 @@ public class MenuWebviewActivity extends AppCompatActivity {
         banner.loadAd(new AdRequest.Builder().build());
 
         Intent i = getIntent();
-        String i_url = "";
+        i_url = "";
 
         if(i!=null) {
             i_url = i.getStringExtra("url");
-            Toast.makeText(this, i_url, Toast.LENGTH_SHORT).show();
+        //    Toast.makeText(this, i_url, Toast.LENGTH_SHORT).show();
         }
         else{
            // Toast.makeText(this, "else", Toast.LENGTH_SHORT).show();
@@ -78,8 +82,31 @@ public class MenuWebviewActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
-        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
+        WebBackForwardList list = null;
+        String backurl="";
+        try{
+
+            list = webView.copyBackForwardList();
+            if (list.getSize() >1){
+                backurl = list.getItemAtIndex(list.getCurrentIndex() - 1).getUrl();
+            }
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
+        if(!backurl.isEmpty() && backurl.contains(getString(R.string.all_menu))) {
+          if(webView.canGoBack())
+              webView.goBack();
+          else {
+              finish();
+              overridePendingTransition(R.anim.slide_inleft, R.anim.slide_outright);
+          }
+        }
+        else {
+            finish();
+            overridePendingTransition(R.anim.slide_inleft, R.anim.slide_outright);
+        }
     }
 
     private class WebviewJavainterface {

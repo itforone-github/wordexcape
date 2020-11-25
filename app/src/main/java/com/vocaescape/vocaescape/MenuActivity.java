@@ -39,38 +39,38 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
-
-    public void move_detailmenu(View view){
-
-        Intent i  = new Intent(MenuActivity.this, MenuWebviewActivity.class);
-
-        switch(view.getId()){
-
-            case R.id.menu01 :
-                    i.putExtra("url",getString(R.string.menu1));
-                    break;
-            case R.id.menu02 :
-                    i.putExtra("url",getString(R.string.menu2));
-                    break;
-            case R.id.menu03 :
-                    i.putExtra("url",getString(R.string.menu3));
-                    break;
-            case R.id.menu04 :
-                    i.putExtra("url",getString(R.string.menu4));
-                    break;
-            case R.id.menu05 :
-                    i.putExtra("url",getString(R.string.menu5));
-                    break;
-            case R.id.menu06 :
-                    i.putExtra("url",getString(R.string.menu6));
-                    break;
-
-        }
-
-        startActivity(i);
-        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
-
-    }
+//
+//    public void move_detailmenu(View view){
+//
+//        Intent i  = new Intent(MenuActivity.this, MenuWebviewActivity.class);
+//
+//        switch(view.getId()){
+//
+//            case R.id.menu01 :
+//                    i.putExtra("url",getString(R.string.menu1));
+//                    break;
+//            case R.id.menu02 :
+//                    i.putExtra("url",getString(R.string.menu2));
+//                    break;
+//            case R.id.menu03 :
+//                    i.putExtra("url",getString(R.string.menu3));
+//                    break;
+//            case R.id.menu04 :
+//                    i.putExtra("url",getString(R.string.menu4));
+//                    break;
+//            case R.id.menu05 :
+//                    i.putExtra("url",getString(R.string.menu5));
+//                    break;
+//            case R.id.menu06 :
+//                    i.putExtra("url",getString(R.string.menu6));
+//                    break;
+//
+//        }
+//
+//        startActivity(i);
+//        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
+//
+//    }
 
     @Override
     public void onBackPressed() {

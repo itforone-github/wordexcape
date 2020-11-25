@@ -75,6 +75,7 @@ public class WebviewActivity  extends AppCompatActivity {
     }
 
     public void move_main(View view) {
+
         Intent i  = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(i);
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);

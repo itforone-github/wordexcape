@@ -279,7 +279,8 @@ public class MainActivity extends AppCompatActivity {
         Intent i;
         switch (view.getId()) {
             case R.id.menu_bt:
-                i  = new Intent(getApplicationContext(), MenuActivity.class);
+                i  = new Intent(getApplicationContext(), MenuWebviewActivity.class);
+                i.putExtra("url",getString(R.string.all_menu));
                 break;
             case R.id.setting_bt:
                 i  = new Intent(getApplicationContext(), SettingActivity.class);
