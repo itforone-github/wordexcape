@@ -7,7 +7,6 @@ import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.vocaescape.vocaescape.setting.SettingActivity;
+import com.vocaescape.vocaescape.util.ActivityManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +26,7 @@ public class WridActivity extends AppCompatActivity {
     private ActivityManager am = ActivityManager.getInstance();
     @BindView(R.id.webView)  WebView webView;
     @BindView(R.id.adView_banner2)    AdView banner2;
-    @BindView(R.id.searchwv_bt)    ImageButton searchwv_bt;
+//    @BindView(R.id.searchwv_bt)    ImageButton searchwv_bt;
 
     int flg_ad =0;
     WebSettings settings;
@@ -39,12 +39,12 @@ public class WridActivity extends AppCompatActivity {
         banner2.loadAd(new AdRequest.Builder().build());
 
 
-        searchwv_bt.setVisibility(View.GONE);
+     //   searchwv_bt.setVisibility(View.GONE);
 
         SharedPreferences sf = getSharedPreferences("pf_flg",MODE_PRIVATE);
         flg_ad = sf.getInt("flg",0);
         int set_value = flg_ad+1;
-        if(set_value==10)  set_value = 0;
+        if(set_value==5)  set_value = 0;
 
         SharedPreferences sharedPreferences = getSharedPreferences("pf_flg",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -62,10 +62,10 @@ public class WridActivity extends AppCompatActivity {
         webView.addJavascriptInterface(new WebviewJavainterface(),"Android");
         webView.setWebViewClient(new Viewmanager(this));
         webView.setWebChromeClient(new WebchromeClient(this, this));
-        settings.setTextZoom(viewtextSize*20+100);
+        settings.setTextZoom(viewtextSize*15+55);
 
         if(url.isEmpty() == false)
-        webView.loadUrl(url);
+            webView.loadUrl(url);
 
         else {
             finish();
@@ -93,7 +93,7 @@ public class WridActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
             case VIEW_REFRESH:
-                settings.setTextZoom(viewtextSize*20+100);
+                settings.setTextZoom(viewtextSize*15+55);
                 break;
         }
     }

@@ -15,7 +15,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.vocaescape.vocaescape.setting.SettingActivity;
+import com.vocaescape.vocaescape.util.ActivityManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,12 +59,13 @@ public class WebviewActivity  extends AppCompatActivity {
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
-        settings.setTextZoom(viewtextSize*20+100);
+
+        if(!i_url.contains("search"))
+            settings.setTextZoom(viewtextSize*15+55);
 
         webView.addJavascriptInterface(new WebviewJavainterface(),"Android");
         webView.setWebViewClient(new Viewmanager(this));
         webView.setWebChromeClient(new WebchromeClient(this, this));
-
 
         if(!i_url.isEmpty() && i_url.equals("search")) {
             webView.loadUrl(getString(R.string.bbs) + "wordsearch.php");
@@ -72,6 +73,7 @@ public class WebviewActivity  extends AppCompatActivity {
         else{
             webView.loadUrl(getString(R.string.board) + i_url);
         }
+
     }
 
     public void move_main(View view) {
@@ -88,8 +90,9 @@ public class WebviewActivity  extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
+
             case VIEW_REFRESH:
-                settings.setTextZoom(viewtextSize*20+100);
+                settings.setTextZoom(viewtextSize*15+55);
                 break;
 
         }
@@ -120,7 +123,7 @@ public class WebviewActivity  extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
     }
 
-    public void move_setting(View view) {
+/*    public void move_setting(View view) {
         Intent i  = new Intent(getApplicationContext(), SettingActivity.class);
         startActivityForResult(i,VIEW_REFRESH);
         //i.putExtra("notice",1);
@@ -132,7 +135,7 @@ public class WebviewActivity  extends AppCompatActivity {
         startActivityForResult(i,VIEW_REFRESH);
         //i.putExtra("notice",1);
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
-    }
+    }*/
 
     private class WebviewJavainterface {
         @JavascriptInterface

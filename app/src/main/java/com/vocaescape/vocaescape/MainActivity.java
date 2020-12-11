@@ -4,10 +4,12 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.Display;
 import android.view.View;
-import android.webkit.WebSettings;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -24,7 +26,8 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.vocaescape.vocaescape.setting.SettingActivity;
+import com.vocaescape.vocaescape.util.ActivityManager;
+import com.vocaescape.vocaescape.util.Enddialog;
 
 
 import butterknife.BindView;
@@ -38,11 +41,12 @@ public class MainActivity extends AppCompatActivity {
 //    @BindView(R.id.fullbt)   Button fulladbt;
     private long backPrssedTime = 0;
 //    private InterstitialAd mInterstitialAd;
-    private UnifiedNativeAd nativeAd;
+    private UnifiedNativeAd nativeAd,nativeAd2;
     private ActivityManager am = ActivityManager.getInstance();
-
+    private Enddialog mEndDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         am.addActivity(this);
@@ -52,9 +56,10 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("flg", 0);
         editor.commit();
+
+
       /*  Intent splash = new Intent(MainActivity.this,SplashActivity.class);
         startActivity(splash);*/
-
 
         //애드몹
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -122,12 +127,13 @@ public class MainActivity extends AppCompatActivity {
         banner.loadAd(new AdRequest.Builder().build());
 
         MobileAds.initialize(this,getString(R.string.app_id));
-        AdLoader.Builder builder = new AdLoader.Builder(this, getString(R.string.nativead_test));
+        AdLoader.Builder builder = new AdLoader.Builder(this, getString(R.string.nativead));
 
         builder.forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
             // OnUnifiedNativeAdLoadedListener implementation.
             @Override
             public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+
                 // You must call destroy on old ads when you are done with them,
                 // otherwise you will have a memory leak.
                 if (nativeAd != null) {
@@ -139,6 +145,98 @@ public class MainActivity extends AppCompatActivity {
                 populateUnifiedNativeAdView(unifiedNativeAd, adView);
                 frameLayout.removeAllViews();
                 frameLayout.addView(adView);
+
+            }
+        });
+
+        AdLoader adLoader = builder.withAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Toast.makeText(MainActivity.this, "Failed to load native ad: "
+                        + errorCode, Toast.LENGTH_SHORT).show();
+            }
+        }).build();
+
+        mEndDialog = new Enddialog(MainActivity.this);
+        mEndDialog.setCancelable(true);
+
+
+        //adLoader.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
+        adLoader.loadAd(new AdRequest.Builder().build());
+
+        exit_setnativead();
+
+    }
+
+    @Override
+    public void onBackPressed(){
+
+            long tempTime = System.currentTimeMillis();
+            long intervalTime = tempTime - backPrssedTime;
+            if(nativeAd2!=null) {
+                mEndDialog.show();
+                Display display = getWindowManager().getDefaultDisplay();
+                Point size = new Point();
+                display.getSize(size);
+                Window window = mEndDialog.getWindow();
+                int x = (int) (size.x * 0.8f);
+                int y = (int) (size.y * 0.6f);
+                window.setLayout(x, y);
+            }
+            else{
+
+                if (0 <= intervalTime && 2000 >= intervalTime){
+                    Intent i = new Intent(MainActivity.this, SplashEndActivity.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
+                    finish();
+                    am.finishAllActivity();
+                } else {
+                    backPrssedTime = tempTime;
+                    Toast.makeText(getApplicationContext(), "한번 더 뒤로가기 누를시 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            //backPrssedTime = tempTime;
+            //Toast.makeText(getApplicationContext(), "한번 더 뒤로가기 누를시 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
+
+        }
+
+    public void click_dialogN(View view){
+        //  Toast.makeText(mContext.getApplicationContext(),"test",Toast.LENGTH_LONG).show();
+        mEndDialog.dismiss();
+    }
+
+    public void click_dialogY(View view){
+        //    Toast.makeText(mContext.getApplicationContext(),"test2",Toast.LENGTH_LONG).show();
+        Intent i = new Intent(MainActivity.this, SplashEndActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
+        finish();
+        am.finishAllActivity();
+
+    }
+
+    public void exit_setnativead(){
+
+        AdLoader.Builder builder = new AdLoader.Builder(this, getString(R.string.nativead_test));
+
+        builder.forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+            // OnUnifiedNativeAdLoadedListener implementation.
+            @Override
+            public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+
+                // You must call destroy on old ads when you are done with them,
+                // otherwise you will have a memory leak.
+                if (nativeAd2 != null) {
+                    nativeAd2.destroy();
+                }
+                nativeAd2 = unifiedNativeAd;
+
+                mEndDialog.populateUnifiedNativeAdView(unifiedNativeAd);
+                //frameLayout.removeAllViews();
+                //frameLayout.addView(adView);
+
             }
         });
 
@@ -152,29 +250,8 @@ public class MainActivity extends AppCompatActivity {
 
         //adLoader.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
         adLoader.loadAd(new AdRequest.Builder().build());
+
     }
-
-
-
-    @Override
-    public void onBackPressed(){
-            long tempTime = System.currentTimeMillis();
-            long intervalTime = tempTime - backPrssedTime;
-            if (0 <= intervalTime && 2000 >= intervalTime){
-                Intent i = new Intent(MainActivity.this, SplashEndActivity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
-                finish();
-                am.finishAllActivity();
-            }
-            else
-            {
-                backPrssedTime = tempTime;
-                Toast.makeText(getApplicationContext(), "한번 더 뒤로가기 누를시 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-
 
     public String MD5(String md5) {
         try {
@@ -282,10 +359,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_bt:
                 i  = new Intent(getApplicationContext(), MenuWebviewActivity.class);
                 i.putExtra("url",getString(R.string.all_menu));
-                break;
-            case R.id.setting_bt:
-                i  = new Intent(getApplicationContext(), MenuWebviewActivity.class);
-                i.putExtra("url",getString(R.string.setting));
                 break;
             case R.id.search_bt:
                 i  = new Intent(getApplicationContext(), WebviewActivity.class);

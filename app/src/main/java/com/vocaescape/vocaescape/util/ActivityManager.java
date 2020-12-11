@@ -1,4 +1,4 @@
-package com.vocaescape.vocaescape;
+package com.vocaescape.vocaescape.util;
 import android.app.Activity;
 
 import java.util.ArrayList;

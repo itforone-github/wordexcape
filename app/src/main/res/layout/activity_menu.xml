@@ -280,14 +280,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:textColor="#909090"
+                android:textColor="#000"
                 android:layout_marginRight="5dp"
+                android:textSize="12dp"
                 android:text="구글광고" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:textColor="#caa97f"
+                android:textColor="#000"
+                android:textSize="12dp"
                 android:text="(Ad Mob by Google)" />
         </LinearLayout>
 
@@ -301,5 +303,5 @@
         android:layout_centerHorizontal="true"
         android:layout_weight="0.12"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/banner_test"></com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/banner"></com.google.android.gms.ads.AdView>
 </LinearLayout>

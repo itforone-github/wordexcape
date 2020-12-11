@@ -1,9 +1,6 @@
 package com.vocaescape.vocaescape;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +10,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.vocaescape.vocaescape.util.ActivityManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

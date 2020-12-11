@@ -2,13 +2,11 @@ package com.vocaescape.vocaescape;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebBackForwardList;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,10 +15,8 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.vocaescape.vocaescape.setting.SettingActivity;
 import com.vocaescape.vocaescape.setting.SettingTextActivity;
-
-import java.util.ArrayList;
+import com.vocaescape.vocaescape.util.ActivityManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
