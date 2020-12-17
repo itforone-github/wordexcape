@@ -9,7 +9,9 @@ public class ActivityManager {
     private ArrayList<Activity> activityList = null;
 
     private ActivityManager() {
+
         activityList = new ArrayList<Activity>();
+
     }
 
     public static ActivityManager getInstance() {
@@ -18,6 +20,7 @@ public class ActivityManager {
             activityMananger = new ActivityManager();
         }
         return activityMananger;
+
     }
 
     public ArrayList<Activity> getActivityList() {

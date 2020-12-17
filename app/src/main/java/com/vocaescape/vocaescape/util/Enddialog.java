@@ -3,6 +3,7 @@ package com.vocaescape.vocaescape.util;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -22,6 +23,7 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.vocaescape.vocaescape.MainActivity;
 import com.vocaescape.vocaescape.R;
+import com.vocaescape.vocaescape.SplashEndActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,13 +31,12 @@ import butterknife.ButterKnife;
 public class Enddialog extends Dialog {
     private Activity mContext;
     private UnifiedNativeAd nativeAd;
-    UnifiedNativeAdView adView;
-    @BindView(R.id.end_linear_adplace)    LinearLayout end_linear_adplace;
+    //private UnifiedNativeAdView adView;
+    @BindView(R.id.end_linear_adplace)    FrameLayout end_linear_adplace;
     public Enddialog(Activity context) {
         super(context);
         mContext = context;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +44,51 @@ public class Enddialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_exit);
         ButterKnife.bind(this);
-        if(adView!=null && end_linear_adplace.getChildCount()>0) {
+       /* if(adView!=null && end_linear_adplace.getChildCount()>0) {
             end_linear_adplace.removeAllViews();
             end_linear_adplace.addView(adView);
-        }
+        }*/
+        MobileAds.initialize(mContext,mContext.getString(R.string.app_id));
+        AdLoader.Builder builder = new AdLoader.Builder(mContext, mContext.getString(R.string.nativead_test));
+
+        builder.forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+            // OnUnifiedNativeAdLoadedListener implementation.
+            @Override
+            public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+
+                // You must call destroy on old ads when you are done with them,
+                // otherwise you will have a memory leak.
+                if (nativeAd != null) {
+                    nativeAd.destroy();
+                }
+
+
+                nativeAd = unifiedNativeAd;
+                UnifiedNativeAdView adView = (UnifiedNativeAdView) getLayoutInflater()
+                        .inflate(R.layout.ad_unified_dialog, null);
+                populateUnifiedNativeAdView(unifiedNativeAd,adView);
+                end_linear_adplace.removeAllViews();
+                end_linear_adplace.addView(adView);
+
+            }
+        });
+
+        AdLoader adLoader = builder.withAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Toast.makeText(getContext(), "Failed to load native ad: "
+                        + errorCode, Toast.LENGTH_SHORT).show();
+            }
+        }).build();
+
+        //adLoader.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
+        adLoader.loadAd(new AdRequest.Builder().build());
+
 
     }
 
-    public void populateUnifiedNativeAdView(UnifiedNativeAd nativeAd) {
-        adView = (UnifiedNativeAdView) getLayoutInflater()
-                .inflate(R.layout.dialog_exit, null);
+    public void populateUnifiedNativeAdView(UnifiedNativeAd nativeAd, UnifiedNativeAdView adView) {
+
         // Set the media view. Media content will be automatically populated in the media view once
         // adView.setNativeAd() is called.
         MediaView mediaView = adView.findViewById(R.id.end_ad_media);
@@ -105,7 +141,7 @@ public class Enddialog extends Dialog {
         // native ad view with this native ad. The SDK will populate the adView's MediaView
         // with the media content from this native ad.
         adView.setNativeAd(nativeAd);
-
-
+      //  this.adView = adView;
     }
+
 }

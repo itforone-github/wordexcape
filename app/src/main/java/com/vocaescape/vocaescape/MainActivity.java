@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -56,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("flg", 0);
         editor.commit();
-
 
       /*  Intent splash = new Intent(MainActivity.this,SplashActivity.class);
         startActivity(splash);*/
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         banner.loadAd(new AdRequest.Builder().build());
 
         MobileAds.initialize(this,getString(R.string.app_id));
-        AdLoader.Builder builder = new AdLoader.Builder(this, getString(R.string.nativead));
+        AdLoader.Builder builder = new AdLoader.Builder(this, getString(R.string.nativead_test));
 
         builder.forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
             // OnUnifiedNativeAdLoadedListener implementation.
@@ -157,14 +157,47 @@ public class MainActivity extends AppCompatActivity {
             }
         }).build();
 
-        mEndDialog = new Enddialog(MainActivity.this);
-        mEndDialog.setCancelable(true);
-
 
         //adLoader.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
         adLoader.loadAd(new AdRequest.Builder().build());
 
-        exit_setnativead();
+/*        AdLoader.Builder builder2 = new AdLoader.Builder(this, getString(R.string.nativead_test));
+
+        builder2.forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+            // OnUnifiedNativeAdLoadedListener implementation.
+            @Override
+            public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                Log.d("init_onunified","true");
+                // You must call destroy on old ads when you are done with them,
+                // otherwise you will have a memory leak.
+                if (nativeAd2 != null) {
+                    nativeAd2.destroy();
+                }
+                nativeAd2 = unifiedNativeAd;
+                UnifiedNativeAdView adView = (UnifiedNativeAdView) getLayoutInflater()
+                        .inflate(R.layout.ad_unified_dialog, null);
+                mEndDialog.populateUnifiedNativeAdView(unifiedNativeAd, adView);
+
+            }
+        });
+
+        AdLoader adLoader2 = builder.withAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Toast.makeText(MainActivity.this, "Failed to load native ad: "
+                        + errorCode, Toast.LENGTH_SHORT).show();
+            }
+        }).build();
+
+
+        //adLoader.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
+        adLoader2.loadAd(new AdRequest.Builder().build());*/
+
+        mEndDialog = new Enddialog(MainActivity.this);
+        mEndDialog.setCancelable(true);
+
+
+       //exit_setnativead();
 
     }
 
@@ -173,15 +206,17 @@ public class MainActivity extends AppCompatActivity {
 
             long tempTime = System.currentTimeMillis();
             long intervalTime = tempTime - backPrssedTime;
-            if(nativeAd2!=null) {
-                mEndDialog.show();
-                Display display = getWindowManager().getDefaultDisplay();
-                Point size = new Point();
-                display.getSize(size);
-                Window window = mEndDialog.getWindow();
-                int x = (int) (size.x * 0.8f);
-                int y = (int) (size.y * 0.6f);
-                window.setLayout(x, y);
+
+/*            if(nativeAd2!=null) {
+//                mEndDialog.show();
+//                /*Display display = getWindowManager().getDefaultDisplay();
+//                Point size = new Point();
+//                display.getSize(size);
+//                Window window = mEndDialog.getWindow();
+//                int x = (int) (size.x * 0.8f);
+//                int y = (int) (size.y * 0.6f);
+//                window.setLayout(x, y);
+
             }
             else{
 
@@ -196,14 +231,22 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "한번 더 뒤로가기 누를시 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
                 }
 
-            }
-            //backPrssedTime = tempTime;
-            //Toast.makeText(getApplicationContext(), "한번 더 뒤로가기 누를시 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
+            }*/
+
+
+        mEndDialog.show();
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        Window window = mEndDialog.getWindow();
+        int x = (int) (size.x * 0.8f);
+        int y = (int) (size.y * 0.6f);
+        window.setLayout(x, y);
 
         }
 
     public void click_dialogN(View view){
-        //  Toast.makeText(mContext.getApplicationContext(),"test",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_LONG).show();
         mEndDialog.dismiss();
     }
 
@@ -217,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void exit_setnativead(){
+  /*  public void exit_setnativead(){
 
         AdLoader.Builder builder = new AdLoader.Builder(this, getString(R.string.nativead_test));
 
@@ -235,7 +278,6 @@ public class MainActivity extends AppCompatActivity {
 
                 mEndDialog.populateUnifiedNativeAdView(unifiedNativeAd);
                 //frameLayout.removeAllViews();
-                //frameLayout.addView(adView);
 
             }
         });
@@ -251,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
         //adLoader.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
         adLoader.loadAd(new AdRequest.Builder().build());
 
-    }
+    }*/
 
     public String MD5(String md5) {
         try {
