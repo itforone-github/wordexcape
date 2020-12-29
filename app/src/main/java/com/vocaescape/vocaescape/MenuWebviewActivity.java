@@ -42,15 +42,17 @@ public class MenuWebviewActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+
         banner.loadAd(new AdRequest.Builder().build());
 
         Intent i = getIntent();
         i_url = "";
 
-        if(i!=null) {
+        if(i!=null){
             i_url = i.getStringExtra("url");
         //    Toast.makeText(this, i_url, Toast.LENGTH_SHORT).show();
         }
+
         else{
            // Toast.makeText(this, "else", Toast.LENGTH_SHORT).show();
         }
@@ -69,7 +71,7 @@ public class MenuWebviewActivity extends AppCompatActivity {
 
     }
 
-    public void move_home(View view){
+    /*public void move_home(View view){
 
         Intent i = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(i);
@@ -77,12 +79,12 @@ public class MenuWebviewActivity extends AppCompatActivity {
         finish();
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
 
-    }
+    }*/
 
 
     @Override
     public void onBackPressed() {
-        WebBackForwardList list = null;
+       /* WebBackForwardList list = null;
         String backurl="";
         try{
 
@@ -106,7 +108,11 @@ public class MenuWebviewActivity extends AppCompatActivity {
         else {
             finish();
             overridePendingTransition(R.anim.slide_inleft, R.anim.slide_outright);
-        }
+        }*/
+
+        finish();
+        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
+
     }
 
     private class WebviewJavainterface {
@@ -116,5 +122,13 @@ public class MenuWebviewActivity extends AppCompatActivity {
             startActivityForResult(i,VIEW_REFRESH);
             overridePendingTransition(R.anim.slide_inleft, R.anim.slide_outright);
         }
+        @JavascriptInterface
+        public void move_detailmenu(String url) {
+            Intent i = new Intent(MenuWebviewActivity.this, MenuWebviewActivity.class);
+            i.putExtra("url",url);
+            startActivityForResult(i,VIEW_REFRESH);
+            overridePendingTransition(R.anim.slide_inleft, R.anim.slide_outright);
+        }
+
     }
 }

@@ -66,7 +66,7 @@
         android:id="@+id/fl_adplace"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.46"
+        android:layout_weight="0.5"
         android:background="#fff"
         />
 
@@ -88,17 +88,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.29"
+        android:layout_weight="0.33"
         android:background="@drawable/upbot_stroke"
         android:orientation="vertical"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:weightSum="1">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.475"
+            android:layout_weight="0.425"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             android:weightSum="1">
@@ -106,61 +111,61 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.056"
+                android:layout_weight="0.1"
                 />
             <Button
                 android:id="@+id/bt_word1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.18"
+                android:layout_weight="0.1625"
 
                 android:background="@drawable/micon01"
                 android:onClick="move_event" />
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.056"
+                android:layout_weight="0.05"
                 />
 
             <Button
                 android:id="@+id/bt_word2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.18"
+                android:layout_weight="0.1625"
                 android:background="@drawable/micon02"
                 android:onClick="move_event" />
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.056"
+                android:layout_weight="0.05"
                 />
 
             <Button
                 android:id="@+id/bt_word3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.18"
+                android:layout_weight="0.1625"
 
                 android:background="@drawable/micon03"
                 android:onClick="move_event" />
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.056"
+                android:layout_weight="0.05"
                 />
 
             <Button
                 android:id="@+id/bt_word4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.18"
+                android:layout_weight="0.1625"
 
                 android:background="@drawable/micon04"
                 android:onClick="move_event" />
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.056"
+                android:layout_weight="0.1"
                 />
 
         </LinearLayout>
@@ -172,33 +177,33 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.475"
+            android:layout_weight="0.425"
             android:orientation="horizontal"
             android:weightSum="1">
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.056"
+                android:layout_weight="0.1"
                 />
 
             <Button
                 android:id="@+id/bt_word5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.18"
+                android:layout_weight="0.1625"
                 android:background="@drawable/micon05"
                 android:onClick="move_event" />
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.056"
+                android:layout_weight="0.05"
                 />
 
             <Button
                 android:id="@+id/bt_word6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.18"
+                android:layout_weight="0.1625"
 
                 android:background="@drawable/micon06"
                 android:onClick="move_event"
@@ -206,14 +211,14 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.056"
+                android:layout_weight="0.05"
                 />
 
             <Button
                 android:id="@+id/bt_word7"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.18"
+                android:layout_weight="0.1625"
 
                 android:background="@drawable/micon07"
                 android:onClick="move_event"
@@ -221,14 +226,14 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.056"
+                android:layout_weight="0.05"
                 />
 
             <Button
                 android:id="@+id/bt_word8"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.18"
+                android:layout_weight="0.1625"
 
                 android:background="@drawable/micon08"
                 android:onClick="move_event"
@@ -236,9 +241,15 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.056"
+                android:layout_weight="0.1"
                 />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"
+            />
     </LinearLayout>
 
     <FrameLayout
@@ -260,7 +271,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             android:textSize="12dp"
-            android:text="구글광고" />
+            android:text="구글 광고" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

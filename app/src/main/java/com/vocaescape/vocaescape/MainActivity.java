@@ -58,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("flg", 0);
         editor.commit();
 
+
+
+
       /*  Intent splash = new Intent(MainActivity.this,SplashActivity.class);
         startActivity(splash);*/
 
@@ -246,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     public void click_dialogN(View view){
-        Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_LONG).show();
+     //   Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_LONG).show();
         mEndDialog.dismiss();
     }
 

@@ -1,11 +1,15 @@
 package com.vocaescape.vocaescape;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +20,14 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.vocaescape.vocaescape.util.ActivityManager;
+
+import org.w3c.dom.Text;
+
+import java.text.CollationElementIterator;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.StringJoiner;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -139,7 +151,79 @@ public class WebviewActivity  extends AppCompatActivity {
 
     private class WebviewJavainterface {
         @JavascriptInterface
-        public void temp(String id, String table) {
+        public void save_history(String word, String cate) {
+
+            SharedPreferences sharedPreferences;
+            ArrayList<String> words = new ArrayList<String>();
+            ArrayList<String> cates = new ArrayList<String>();
+            sharedPreferences = getSharedPreferences("sch_words",MODE_PRIVATE);
+            String saved_words =sharedPreferences.getString("word","");
+            String saved_cates =sharedPreferences.getString("cate","");
+
+            if(!saved_words.isEmpty() && !saved_words.equals("")){
+
+                String [] temp_word = saved_words.split(",");
+                String [] temp_cate = saved_cates.split(",");
+
+                Collections.addAll(words,temp_word);
+                Collections.addAll(cates,temp_cate);
+
+                Log.d("words_2_1", TextUtils.join(",",words));
+                Log.d("words_2_2", TextUtils.join(",",cates));
+
+                Log.d("words_0",words.toString());
+                if(words.contains(word)){
+                    int index = words.indexOf(word);
+                    words.remove(word);
+                    cates.remove(index);
+                }
+                Log.d("words_2_3", TextUtils.join(",",words));
+                Log.d("words_2_4", TextUtils.join(",",cates));
+
+                if(words.size()>=10){
+                    words.remove(0);
+                    cates.remove(0);
+                }
+                Log.d("words_2_5", TextUtils.join(",",words));
+                Log.d("words_2_6", TextUtils.join(",",cates));
+
+                words.add(word);
+                cates.add(cate);
+                Log.d("words_2_7", TextUtils.join(",",words));
+                Log.d("words_2_8", TextUtils.join(",",cates));
+
+                Log.d("words_1",words.toString());
+
+
+
+                sharedPreferences = getSharedPreferences("sch_words",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("word",TextUtils.join(",",words));
+                editor.putString("cate",TextUtils.join(",",cates));
+                editor.commit();
+
+            }
+            else{
+                sharedPreferences = getSharedPreferences("sch_words",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("word",word);
+                editor.putString("cate",cate);
+                editor.commit();
+            }
+        }
+
+        @JavascriptInterface
+        public void clicked_schtxt() {
+
+            SharedPreferences sharedPreferences = getSharedPreferences("sch_words",MODE_PRIVATE);
+            String saved_words =sharedPreferences.getString("word","");
+            String saved_cates =sharedPreferences.getString("cate","");
+            webView.post(new Runnable() {
+                @Override
+                public void run() {
+                    webView.loadUrl("javascript:display_words('"+saved_words+"','"+saved_cates+"');");
+                }
+            });
 
         }
     }
