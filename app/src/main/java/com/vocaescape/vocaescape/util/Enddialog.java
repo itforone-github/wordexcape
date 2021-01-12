@@ -32,7 +32,10 @@ public class Enddialog extends Dialog {
     private Activity mContext;
     private UnifiedNativeAd nativeAd;
     //private UnifiedNativeAdView adView;
-    @BindView(R.id.end_linear_adplace)    FrameLayout end_linear_adplace;
+    private ActivityManager am = ActivityManager.getInstance();
+    public @BindView(R.id.end_linear_adplace)    FrameLayout end_linear_adplace;
+    public @BindView(R.id.close_btY)    FrameLayout close_btY;
+    public @BindView(R.id.close_btN)    FrameLayout close_btN;
     public Enddialog(Activity context) {
         super(context);
         mContext = context;
@@ -66,6 +69,25 @@ public class Enddialog extends Dialog {
                 nativeAd = unifiedNativeAd;
                 UnifiedNativeAdView adView = (UnifiedNativeAdView) getLayoutInflater()
                         .inflate(R.layout.ad_unified_dialog, null);
+             /*   findViewById(R.id.close_btN).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(mContext,"No", Toast.LENGTH_LONG).show();
+                        dismiss();
+                    }
+                });
+                findViewById(R.id.close_btY).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(mContext,"Yes", Toast.LENGTH_LONG).show();
+                        dismiss();
+                        Intent i = new Intent(mContext, SplashEndActivity.class);
+                        mContext.startActivity(i);
+                        mContext.overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
+                        mContext.finish();
+                        am.finishAllActivity();
+                    }
+                });*/
                 populateUnifiedNativeAdView(unifiedNativeAd,adView);
                 end_linear_adplace.removeAllViews();
                 end_linear_adplace.addView(adView);
@@ -143,5 +165,4 @@ public class Enddialog extends Dialog {
         adView.setNativeAd(nativeAd);
       //  this.adView = adView;
     }
-
 }

@@ -1,5 +1,6 @@
 package com.vocaescape.vocaescape.setting;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.SeekBar;
@@ -48,6 +49,10 @@ public class SettingTextActivity extends AppCompatActivity {
                 Log.d("seek_value",String.valueOf(progress));
                 //now_progress=progress;
                 viewtextSize = progress;
+                SharedPreferences sharedPreferences = getSharedPreferences("viewtxtsize",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("value", viewtextSize);
+                editor.commit();
             }
 
             @Override

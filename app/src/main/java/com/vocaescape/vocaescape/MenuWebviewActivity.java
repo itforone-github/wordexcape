@@ -2,11 +2,13 @@ package com.vocaescape.vocaescape;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebBackForwardList;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -109,7 +111,7 @@ public class MenuWebviewActivity extends AppCompatActivity {
             finish();
             overridePendingTransition(R.anim.slide_inleft, R.anim.slide_outright);
         }*/
-
+        Log.d("tranoption","back");
         finish();
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
 
@@ -119,16 +121,19 @@ public class MenuWebviewActivity extends AppCompatActivity {
         @JavascriptInterface
         public void move_txtsize() {
             Intent i = new Intent(MenuWebviewActivity.this, SettingTextActivity.class);
-            startActivityForResult(i,VIEW_REFRESH);
+            startActivity(i);
             overridePendingTransition(R.anim.slide_inleft, R.anim.slide_outright);
         }
         @JavascriptInterface
         public void move_detailmenu(String url) {
             Intent i = new Intent(MenuWebviewActivity.this, MenuWebviewActivity.class);
             i.putExtra("url",url);
-            startActivityForResult(i,VIEW_REFRESH);
+            Log.d("tranoption","load");
+            startActivity(i);
             overridePendingTransition(R.anim.slide_inleft, R.anim.slide_outright);
         }
+
+
 
     }
 }

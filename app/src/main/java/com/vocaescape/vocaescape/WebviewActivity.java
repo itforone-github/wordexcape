@@ -210,6 +210,8 @@ public class WebviewActivity  extends AppCompatActivity {
                 editor.putString("cate",cate);
                 editor.commit();
             }
+            settings.setTextZoom(viewtextSize*15+55);
+
         }
 
         @JavascriptInterface
@@ -224,6 +226,8 @@ public class WebviewActivity  extends AppCompatActivity {
                     webView.loadUrl("javascript:display_words('"+saved_words+"','"+saved_cates+"');");
                 }
             });
+            settings.setTextZoom(100);
+
 
         }
     }

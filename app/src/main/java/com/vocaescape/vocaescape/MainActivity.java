@@ -28,6 +28,7 @@ import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.vocaescape.vocaescape.util.ActivityManager;
+import static com.vocaescape.vocaescape.setting.SettingTextActivity.viewtextSize;
 import com.vocaescape.vocaescape.util.Enddialog;
 
 
@@ -58,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("flg", 0);
         editor.commit();
 
-
+        SharedPreferences pref_txtsize = getSharedPreferences("viewtxtsize",MODE_PRIVATE);
+        viewtextSize = pref_txtsize.getInt("value",0);
 
 
       /*  Intent splash = new Intent(MainActivity.this,SplashActivity.class);
@@ -200,6 +202,9 @@ public class MainActivity extends AppCompatActivity {
         mEndDialog.setCancelable(true);
 
 
+
+
+
        //exit_setnativead();
 
     }
@@ -245,16 +250,35 @@ public class MainActivity extends AppCompatActivity {
         int x = (int) (size.x * 0.8f);
         int y = (int) (size.y * 0.6f);
         window.setLayout(x, y);
+        mEndDialog.close_btN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEndDialog.dismiss();
+            }
+        });
+        mEndDialog.close_btY.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mEndDialog.dismiss();
+                Intent i = new Intent(MainActivity.this, SplashEndActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
+                finish();
+                am.finishAllActivity();
+            }
+        });
 
         }
 
-    public void click_dialogN(View view){
+    public void click_dialogN_main(View view){
      //   Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_LONG).show();
         mEndDialog.dismiss();
     }
 
-    public void click_dialogY(View view){
+    public void click_dialogY_main(View view){
         //    Toast.makeText(mContext.getApplicationContext(),"test2",Toast.LENGTH_LONG).show();
+        mEndDialog.dismiss();
         Intent i = new Intent(MainActivity.this, SplashEndActivity.class);
         startActivity(i);
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);

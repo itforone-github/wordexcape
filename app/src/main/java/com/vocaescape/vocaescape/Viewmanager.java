@@ -2,8 +2,11 @@ package com.vocaescape.vocaescape;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
+
 import com.google.android.gms.ads.InterstitialAd;
 
 import static com.vocaescape.vocaescape.setting.SettingActivity.VIEW_REFRESH;
@@ -21,6 +24,7 @@ class Viewmanager extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if(url.contains("wr_id=")) {
+                Log.d("tranoption","new");
                 Intent i = new Intent(viewActivity.getApplicationContext(), WridActivity.class);
                 i.putExtra("url",url);
                 viewActivity.startActivityForResult(i,VIEW_REFRESH);

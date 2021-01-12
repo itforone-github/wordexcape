@@ -1,113 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:weightSum="1"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/end_linear_adplace"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF"
+        android:layout_height="0dp"
+        android:layout_weight="0.74"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.08"
+        android:layout_gravity="center"
+        >
+        <TextView
+            android:id="@+id/end_ad_call_to_action"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="시작하기"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:background="@drawable/border_radius"
+            />
+    </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.08"
+        android:background="#f1f1f1"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="단어탈출을 종료하시겠습니까?"
+            android:gravity="center"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal"
         android:weightSum="1"
-        android:orientation="vertical">
+        >
 
         <FrameLayout
-            android:id="@+id/end_linear_adplace"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.68"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.12"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:weightSum="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:id="@+id/close_btN"
             >
-<!--            <Space-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="0dp"-->
-<!--                android:layout_weight="0.15"-->
-<!--                />-->
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.7"
-                >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:background="#0f9e5c"
-                    >
             <TextView
-                android:id="@+id/end_ad_call_to_action"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:text="취소"
+                android:gravity="center"
+                android:textSize="20dp"
                 android:layout_gravity="center"
-                android:text="시작하기"
-                android:textColor="#fff"
-                android:gravity="center"
                 />
-                </LinearLayout>
-            </FrameLayout>
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.3"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:background="#f1f1f1"
-            android:orientation="horizontal"
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/close_btY"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
             >
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="단어탈출을 종료하시겠습니까?"
+                android:text="종료"
                 android:gravity="center"
+                android:textSize="20dp"
+                android:layout_gravity="center"
                 />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:orientation="horizontal"
-            android:weightSum="1"
-            >
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:onClick="click_dialogN"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="취소"
-                    android:gravity="center"
-                    android:textSize="20dp"
-                    android:layout_gravity="center"
-                    />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:onClick="click_dialogY"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="종료"
-                    android:gravity="center"
-                    android:textSize="20dp"
-                    android:layout_gravity="center"
-                    />
-            </FrameLayout>
-        </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
+</LinearLayout>
