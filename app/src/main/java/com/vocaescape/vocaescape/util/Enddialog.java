@@ -124,7 +124,7 @@ public class Enddialog extends Dialog {
         adView.setStarRatingView(adView.findViewById(R.id.end_ad_stars));
         //adView.setStoreView(adView.findViewById(R.id.ad_store));
         adView.setAdvertiserView(adView.findViewById(R.id.end_ad_advertiser));
-        adView.setCallToActionView(adView.findViewById(R.id.end_ad_call_to_action));
+        adView.setCallToActionView(findViewById(R.id.end_ad_call_to_action));
         // The headline is guaranteed to be in every UnifiedNativeAd.
         ((TextView) adView.getHeadlineView()).setText(nativeAd.getHeadline());
         // These assets aren't guaranteed to be in every UnifiedNativeAd, so it's important to

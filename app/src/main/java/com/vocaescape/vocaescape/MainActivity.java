@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
 
         SharedPreferences pref_txtsize = getSharedPreferences("viewtxtsize",MODE_PRIVATE);
-        viewtextSize = pref_txtsize.getInt("value",0);
+        viewtextSize = pref_txtsize.getInt("value",3);
 
 
       /*  Intent splash = new Intent(MainActivity.this,SplashActivity.class);
@@ -323,6 +323,7 @@ public class MainActivity extends AppCompatActivity {
     }*/
 
     public String MD5(String md5) {
+
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
             byte[] array = md.digest(md5.getBytes());
@@ -334,6 +335,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (java.security.NoSuchAlgorithmException e) {
         }
         return null;
+
     }
 
 

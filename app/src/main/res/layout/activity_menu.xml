@@ -304,4 +304,5 @@
         android:layout_weight="0.12"
         ads:adSize="SMART_BANNER"
         ads:adUnitId="@string/banner"></com.google.android.gms.ads.AdView>
+
 </LinearLayout>
