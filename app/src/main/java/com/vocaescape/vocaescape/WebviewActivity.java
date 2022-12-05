@@ -1,54 +1,61 @@
 package com.vocaescape.vocaescape;
 
+import static com.vocaescape.vocaescape.MenuWebviewActivity.VIEW_REFRESH;
+import static com.vocaescape.vocaescape.setting.SettingTextActivity.viewtextSize;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
+import com.google.android.ads.nativetemplates.NativeTemplateStyle;
+import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.nativead.NativeAd;
+import com.vocaescape.vocaescape.databinding.ActivityWebviewBinding;
 import com.vocaescape.vocaescape.util.ActivityManager;
+import com.vocaescape.vocaescape.util.Common;
 
-import org.w3c.dom.Text;
-
-import java.text.CollationElementIterator;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.StringJoiner;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-import static com.vocaescape.vocaescape.MenuWebviewActivity.VIEW_REFRESH;
-import static com.vocaescape.vocaescape.setting.SettingTextActivity.viewtextSize;
 
 public class WebviewActivity  extends AppCompatActivity {
+    ActivityWebviewBinding binding;
+    WebView webView;
 
-    @BindView(R.id.webView)    WebView webView;
-    @BindView(R.id.adView_banner2)   AdView banner2;
+
     //@BindView(R.id.xic)    ImageView xic;
     private ActivityManager am = ActivityManager.getInstance();
-    String i_url="";
+    String i_url="",deviceId="";
     WebSettings settings;
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_webview);
         am.addActivity(this);
-        ButterKnife.bind(this);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_webview);
+        binding.setMain(this);
+        webView = binding.webView;
+        deviceId= Common.getMyDeviceId(this);
+
 
         i_url = getIntent().getStringExtra("board_name");
 
@@ -58,20 +65,26 @@ public class WebviewActivity  extends AppCompatActivity {
         else
             i_url= "";
 
-
+        Log.d("i_url",i_url);
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
         //banner2.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
-        banner2.loadAd(new AdRequest.Builder().build());
+
 
         settings = webView.getSettings();
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
-
+        if(Build.VERSION.SDK_INT >= 21) {
+            webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+            //쿠키 생성
+            CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.setAcceptCookie(true);
+            cookieManager.setAcceptThirdPartyCookies(webView,true);
+        }
         if(!i_url.contains("search"))
             settings.setTextZoom(viewtextSize*15+55);
 
@@ -81,10 +94,12 @@ public class WebviewActivity  extends AppCompatActivity {
 
         if(!i_url.isEmpty() && i_url.equals("search")) {
             webView.loadUrl(getString(R.string.bbs) + "wordsearch.php");
+        }else if(!i_url.isEmpty() && i_url.equals("myword")){
+            webView.loadUrl(getString(R.string.bbs) + "my_word_list.php?deviceId="+Common.getMyDeviceId(this));
+        }else{
+            webView.loadUrl(getString(R.string.board) + i_url+"&deviceId="+Common.getMyDeviceId(this));
         }
-        else{
-            webView.loadUrl(getString(R.string.board) + i_url);
-        }
+        bannerAd();
 
     }
 
@@ -101,6 +116,7 @@ public class WebviewActivity  extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         switch (requestCode){
 
             case VIEW_REFRESH:
@@ -110,15 +126,13 @@ public class WebviewActivity  extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBackPressed() {
         if (webView.canGoBack()) {
-            if(webView.getUrl().equals(getString(R.string.board) + i_url)){
+            if(webView.getUrl().endsWith("sca=A")){
                 finish();
                 overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
-            }
-           else if(webView.getUrl().contains("sca=")) {
-                        webView.loadUrl(getString(R.string.board) + i_url);
             }
             else   webView.goBack();
         }
@@ -135,19 +149,6 @@ public class WebviewActivity  extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
     }
 
-/*    public void move_setting(View view) {
-        Intent i  = new Intent(getApplicationContext(), SettingActivity.class);
-        startActivityForResult(i,VIEW_REFRESH);
-        //i.putExtra("notice",1);
-        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
-    }
-    public void move_search(View view) {
-        Intent i  = new Intent(getApplicationContext(), WebviewActivity.class);
-        i.putExtra("board_name", "search");
-        startActivityForResult(i,VIEW_REFRESH);
-        //i.putExtra("notice",1);
-        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
-    }*/
 
     private class WebviewJavainterface {
         @JavascriptInterface
@@ -230,5 +231,29 @@ public class WebviewActivity  extends AppCompatActivity {
 
 
         }
+    }
+    public void bannerAd(){
+        MobileAds.initialize(this);
+        AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.nativead_test))
+                .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+                    @Override
+                    public void onNativeAdLoaded(NativeAd nativeAd) {
+                        NativeTemplateStyle styles = new
+                                NativeTemplateStyle.Builder().build();
+                        TemplateView template = findViewById(R.id.adView_banner);
+                        template.setStyles(styles);
+                        template.setNativeAd(nativeAd);
+                    }
+                })
+                .build();
+
+        adLoader.loadAd(new AdRequest.Builder().build());
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        bannerAd();
     }
 }

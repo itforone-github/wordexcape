@@ -3,27 +3,13 @@ package com.vocaescape.vocaescape.util;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.formats.MediaView;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
-import com.google.android.gms.ads.formats.UnifiedNativeAdView;
-import com.vocaescape.vocaescape.MainActivity;
 import com.vocaescape.vocaescape.R;
-import com.vocaescape.vocaescape.SplashEndActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +37,7 @@ public class Enddialog extends Dialog {
             end_linear_adplace.removeAllViews();
             end_linear_adplace.addView(adView);
         }*/
-        MobileAds.initialize(mContext,mContext.getString(R.string.app_id));
+        MobileAds.initialize(mContext);
         AdLoader.Builder builder = new AdLoader.Builder(mContext, mContext.getString(R.string.nativead_test));
 
         builder.forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
@@ -67,8 +53,8 @@ public class Enddialog extends Dialog {
 
 
                 nativeAd = unifiedNativeAd;
-                UnifiedNativeAdView adView = (UnifiedNativeAdView) getLayoutInflater()
-                        .inflate(R.layout.ad_unified_dialog, null);
+                //UnifiedNativeAdView adView = (UnifiedNativeAdView) getLayoutInflater()
+                   //     .inflate(R.layout.ad_unified_dialog, null);
              /*   findViewById(R.id.close_btN).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -88,27 +74,27 @@ public class Enddialog extends Dialog {
                         am.finishAllActivity();
                     }
                 });*/
-                populateUnifiedNativeAdView(unifiedNativeAd,adView);
-                end_linear_adplace.removeAllViews();
-                end_linear_adplace.addView(adView);
+//                populateUnifiedNativeAdView(unifiedNativeAd,adView);
+//                end_linear_adplace.removeAllViews();
+//                end_linear_adplace.addView(adView);
 
             }
         });
 
-        AdLoader adLoader = builder.withAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                Toast.makeText(getContext(), "Failed to load native ad: "
-                        + errorCode, Toast.LENGTH_SHORT).show();
-            }
-        }).build();
-
-        //adLoader.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
-        adLoader.loadAd(new AdRequest.Builder().build());
+//        AdLoader adLoader = builder.withAdListener(new AdListener() {
+//            @Override
+//            public void onAdFailedToLoad(int errorCode) {
+//                Toast.makeText(getContext(), "Failed to load native ad: "
+//                        + errorCode, Toast.LENGTH_SHORT).show();
+//            }
+//        }).build();
+//
+//        //adLoader.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
+//        adLoader.loadAd(new AdRequest.Builder().build());
 
 
     }
-
+/*
     public void populateUnifiedNativeAdView(UnifiedNativeAd nativeAd, UnifiedNativeAdView adView) {
 
         // Set the media view. Media content will be automatically populated in the media view once
@@ -164,5 +150,5 @@ public class Enddialog extends Dialog {
         // with the media content from this native ad.
         adView.setNativeAd(nativeAd);
       //  this.adView = adView;
-    }
+    }*/
 }

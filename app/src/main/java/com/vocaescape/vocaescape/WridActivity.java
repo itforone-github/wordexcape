@@ -1,31 +1,39 @@
 package com.vocaescape.vocaescape;
 
+import static com.vocaescape.vocaescape.MenuWebviewActivity.VIEW_REFRESH;
+import static com.vocaescape.vocaescape.setting.SettingTextActivity.viewtextSize;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
+import com.google.android.ads.nativetemplates.NativeTemplateStyle;
+import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.nativead.NativeAd;
+import com.vocaescape.vocaescape.databinding.ActivityWebviewBinding;
 import com.vocaescape.vocaescape.setting.SettingActivity;
 import com.vocaescape.vocaescape.util.ActivityManager;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.vocaescape.vocaescape.MenuWebviewActivity.VIEW_REFRESH;
-import static com.vocaescape.vocaescape.setting.SettingTextActivity.viewtextSize;
-
 public class WridActivity extends AppCompatActivity {
+    ActivityWebviewBinding binding;
     private ActivityManager am = ActivityManager.getInstance();
-    @BindView(R.id.webView)  WebView webView;
-    @BindView(R.id.adView_banner2)    AdView banner2;
+    WebView webView;
 //    @BindView(R.id.searchwv_bt)    ImageButton searchwv_bt;
 
     int flg_ad =0;
@@ -36,7 +44,10 @@ public class WridActivity extends AppCompatActivity {
         setContentView(R.layout.activity_webview);
         am.addActivity(this);
         ButterKnife.bind(this);
-        banner2.loadAd(new AdRequest.Builder().build());
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_webview);
+        binding.setMain2(this);
+        webView = binding.webView;
+
 
 
      //   searchwv_bt.setVisibility(View.GONE);
@@ -53,8 +64,17 @@ public class WridActivity extends AppCompatActivity {
 
         String url = getIntent().getStringExtra("url");
 
+        Log.d("url",url);
+
 
         settings = webView.getSettings();
+        if(Build.VERSION.SDK_INT >= 21) {
+            webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+            //쿠키 생성
+            CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.setAcceptCookie(true);
+            cookieManager.setAcceptThirdPartyCookies(webView,true);
+        }
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
@@ -71,11 +91,12 @@ public class WridActivity extends AppCompatActivity {
             finish();
             overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
         }
+        bannerAd();
     }
 
     @Override
     public void onBackPressed() {
-        if(flg_ad==4) {
+        /*if(flg_ad==4) {
             Intent i = new Intent(this, SplashadActivity.class);
             startActivity(i);
             overridePendingTransition(R.anim.slide_inleft, R.anim.slide_outright);
@@ -85,7 +106,9 @@ public class WridActivity extends AppCompatActivity {
         else {
             super.onBackPressed();
             overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
-        }
+        }*/
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
     }
 
     @Override
@@ -128,5 +151,22 @@ public class WridActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
     }
 
+    public void bannerAd(){
+        MobileAds.initialize(this);
+        AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.nativead_test))
+                .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+                    @Override
+                    public void onNativeAdLoaded(NativeAd nativeAd) {
+                        NativeTemplateStyle styles = new
+                                NativeTemplateStyle.Builder().build();
+                        TemplateView template = findViewById(R.id.adView_banner);
+                        template.setStyles(styles);
+                        template.setNativeAd(nativeAd);
+                    }
+                })
+                .build();
 
+        adLoader.loadAd(new AdRequest.Builder().build());
+
+    }
 }

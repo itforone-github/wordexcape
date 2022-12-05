@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.vocaescape.vocaescape">
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -10,12 +10,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        >
         <activity android:name=".setting.SettingActivity"></activity>
         <activity android:name=".setting.SettingTextActivity"></activity>
 
         <activity
             android:name=".MainActivity"
+
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".MenuActivity"
@@ -31,7 +34,10 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".SplashActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,117 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="main"
+            type="com.vocaescape.vocaescape.WebviewActivity" />
+        <variable
+            name="main2"
+            type="com.vocaescape.vocaescape.WridActivity" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:background="@drawable/bottom_stroke"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:weightSum="1">
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-<!--            <ImageView-->
-<!--                android:id="@+id/xic"-->
-<!--                android:visibility="gone"-->
-<!--                android:layout_width="30dp"-->
-<!--                android:layout_height="30dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:scaleType="fitXY"-->
-<!--                android:onClick="move_main"-->
-<!--                android:layout_gravity="center_vertical|left"-->
-<!--                android:src="@drawable/close"-->
-<!--                />-->
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:src="@drawable/logo"
-                android:onClick="move_home"
-                />
-     <!--       <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="right|center"
-                >
-
-                <ImageButton
-                    android:id="@+id/searchwv_bt"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@null"
-                    android:layout_marginRight="10dp"
-                    android:onClick="move_search"
-                    android:src="@android:drawable/ic_menu_search" />
-                <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@null"
-                    android:scaleType="fitStart"
-                    android:onClick="move_setting"
-                    android:src="@drawable/settings_icon" />
-
-
-            </LinearLayout>-->
-
-        </FrameLayout>
-    </LinearLayout>
-
-    <WebView
-        android:id="@+id/webView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.75"
-
-        />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/upbot_stroke"
-        android:layout_weight="0.03">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:textColor="#000"
-                android:layout_marginRight="5dp"
-                android:textSize="12dp"
-                android:text="구글 광고" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:textColor="#000"
-                android:textSize="12dp"
-                android:text="(Ad Mob by Google)" />
-        </LinearLayout>
-    </FrameLayout>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:background="@drawable/bottom_stroke"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="1">
 
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView_banner2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="0.12"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/banner"></com.google.android.gms.ads.AdView>
-</LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <!--            <ImageView-->
+                <!--                android:id="@+id/xic"-->
+                <!--                android:visibility="gone"-->
+                <!--                android:layout_width="30dp"-->
+                <!--                android:layout_height="30dp"-->
+                <!--                android:layout_marginLeft="10dp"-->
+                <!--                android:scaleType="fitXY"-->
+                <!--                android:onClick="move_main"-->
+                <!--                android:layout_gravity="center_vertical|left"-->
+                <!--                android:src="@drawable/close"-->
+                <!--                />-->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:onClick="move_home"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/logo" />
+                <!--       <LinearLayout
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:orientation="horizontal"
+                           android:layout_gravity="right|center"
+                           >
+
+                           <ImageButton
+                               android:id="@+id/searchwv_bt"
+                               android:layout_width="30dp"
+                               android:layout_height="30dp"
+                               android:background="@null"
+                               android:layout_marginRight="10dp"
+                               android:onClick="move_search"
+                               android:src="@android:drawable/ic_menu_search" />
+                           <ImageButton
+                               android:layout_width="30dp"
+                               android:layout_height="30dp"
+                               android:background="@null"
+                               android:scaleType="fitStart"
+                               android:onClick="move_setting"
+                               android:src="@drawable/settings_icon" />
+
+
+                       </LinearLayout>-->
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.75"
+
+            />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.03"
+            android:background="#2d2d2d"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical"
+                    android:text="구글 광고"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="(Ad Mob by Google)"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <com.google.android.ads.nativetemplates.TemplateView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.12"
+            android:id="@+id/adView_banner"
+            app:gnt_template_type="@layout/gnt_small_template_view"
+            />
+    </LinearLayout>
+</layout>

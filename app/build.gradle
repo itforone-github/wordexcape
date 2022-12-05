@@ -1,16 +1,16 @@
+plugins {
+    id 'com.android.application'
+}
 apply plugin: 'com.android.application'
-
-
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.vocaescape.vocaescape"
         minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 17
-        versionName "2.9.16"
+        targetSdkVersion 33
+        versionCode 23
+        versionName "3.10.22"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -19,24 +19,36 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    dataBinding{
+        enabled = true
+    }
+    buildFeatures {
+        viewBinding = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }}
+    }
+}
 
 
 dependencies {
-    implementation 'com.google.firebase:firebase-analytics:17.2.2'
-    implementation 'com.jakewharton:butterknife:10.0.0'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.gms:play-services-ads:18.2.0'
-    testImplementation 'junit:junit:4.12'
+
+    implementation 'com.google.android.gms:play-services-ads:20.1.0'
+    implementation 'com.google.firebase:firebase-analytics:18.0.3'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    implementation 'mc.kr.cross.sdk:sdk:0.1.1'
+    implementation 'com.google.errorprone:error_prone_annotations:2.9.0'
+    implementation project(':nativetemplates')
+    implementation "androidx.work:work-runtime:2.7.1" // java
 }
 
 apply plugin: 'com.google.gms.google-services'
