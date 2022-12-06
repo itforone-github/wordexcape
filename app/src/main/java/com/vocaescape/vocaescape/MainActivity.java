@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         //광고 보여주기
     public void bannerAd(){
         MobileAds.initialize(this);
-        AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.nativead_test))
+        AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.nativead))
                 .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
                     @Override
                     public void onNativeAdLoaded(NativeAd nativeAd) {
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .build();
-        AdLoader adLoader2 = new AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
+        AdLoader adLoader2 = new AdLoader.Builder(this, getString(R.string.nativead))
                 .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
                     @Override
                     public void onNativeAdLoaded(NativeAd nativeAd) {

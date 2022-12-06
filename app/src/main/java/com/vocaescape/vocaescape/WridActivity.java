@@ -153,7 +153,7 @@ public class WridActivity extends AppCompatActivity {
 
     public void bannerAd(){
         MobileAds.initialize(this);
-        AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.nativead_test))
+        AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.nativead))
                 .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
                     @Override
                     public void onNativeAdLoaded(NativeAd nativeAd) {
