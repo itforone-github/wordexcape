@@ -22,6 +22,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.google.android.ads.nativetemplates.NativeTemplateStyle;
 import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
@@ -44,6 +45,7 @@ public class WebviewActivity  extends AppCompatActivity {
     private ActivityManager am = ActivityManager.getInstance();
     String i_url="",deviceId="";
     WebSettings settings;
+    int adClick = 0;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class WebviewActivity  extends AppCompatActivity {
             }
         });
         //banner2.loadAd(new AdRequest.Builder().addTestDevice("F225B75A37119EE77E3DEAB3DC23EB31").build());
-
+        bannerAd();
 
         settings = webView.getSettings();
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
@@ -99,7 +101,6 @@ public class WebviewActivity  extends AppCompatActivity {
         }else{
             webView.loadUrl(getString(R.string.board) + i_url+"&deviceId="+Common.getMyDeviceId(this));
         }
-        bannerAd();
 
     }
 
@@ -129,12 +130,20 @@ public class WebviewActivity  extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBackPressed() {
+
         if (webView.canGoBack()) {
             if(webView.getUrl().endsWith("sca=A")){
                 finish();
                 overridePendingTransition(R.anim.slide_inleft,R.anim.slide_outright);
             }
-            else   webView.goBack();
+            else {
+                if(0 < webView.getUrl().indexOf("board.php")){
+                    webView.loadUrl(getString(R.string.board)+ i_url+"&deviceId="+Common.getMyDeviceId(this)+"&sca=A");
+                }else {
+                    webView.goBack();
+                }
+
+            }
         }
         else {
             super.onBackPressed();
@@ -244,16 +253,27 @@ public class WebviewActivity  extends AppCompatActivity {
                         template.setStyles(styles);
                         template.setNativeAd(nativeAd);
                     }
+                }).withAdListener(new AdListener() {
+                    @Override
+                    public void onAdClicked() {
+                        super.onAdClicked();
+                        bannerAd();
+                        adClick++;
+                    }
                 })
                 .build();
 
-        adLoader.loadAd(new AdRequest.Builder().build());
+        if(adClick == 0) {
+            adLoader.loadAd(new AdRequest.Builder().build());
+        }else{
+            adLoader.loadAds(new AdRequest.Builder().build(),2);
+        }
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        bannerAd();
+
     }
 }

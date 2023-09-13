@@ -20,6 +20,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.google.android.ads.nativetemplates.NativeTemplateStyle;
 import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
@@ -33,10 +34,12 @@ import butterknife.ButterKnife;
 public class WridActivity extends AppCompatActivity {
     ActivityWebviewBinding binding;
     private ActivityManager am = ActivityManager.getInstance();
+
     WebView webView;
 //    @BindView(R.id.searchwv_bt)    ImageButton searchwv_bt;
 
     int flg_ad =0;
+    int adClick = 0;
     WebSettings settings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,10 +166,25 @@ public class WridActivity extends AppCompatActivity {
                         template.setStyles(styles);
                         template.setNativeAd(nativeAd);
                     }
+                }).withAdListener(new AdListener() {
+                    @Override
+                    public void onAdClicked() {
+                        super.onAdClicked();
+                        bannerAd();
+                        adClick++;
+                    }
                 })
                 .build();
+        if(adClick == 0) {
+            adLoader.loadAd(new AdRequest.Builder().build());
+        }else{
+            adLoader.loadAds(new AdRequest.Builder().build(),2);
+        }
 
-        adLoader.loadAd(new AdRequest.Builder().build());
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

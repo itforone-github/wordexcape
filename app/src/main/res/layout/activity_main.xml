@@ -8,19 +8,19 @@
             name="main"
             type="com.vocaescape.vocaescape.MainActivity" />
     </data>
+
     <LinearLayout
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="1"
         android:background="#fff"
-        >
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.1"
-            android:background="@drawable/bottom_stroke"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -81,12 +81,13 @@
         </LinearLayout>
 
         <com.google.android.ads.nativetemplates.TemplateView
+            android:id="@+id/adView_main"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.46"
-            android:id="@+id/adView_main"
-            app:gnt_template_type="@layout/gnt_medium_template_view"
-            />
+            android:layout_weight="0.44"
+
+            android:background="#fafafa"
+            app:gnt_template_type="@layout/gnt_medium_template_view" />
 
 
         <!--    <LinearLayout-->
@@ -106,21 +107,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.29"
-            android:background="@drawable/top_stroke"
+            android:layout_weight="0.28"
+            android:background="#fafafa"
             android:orientation="vertical"
             android:weightSum="1">
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.10" />
+                android:layout_weight="0.14"
+                android:background="#fafafa"
+                tools:visibility="visible" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_margin="6dp"
-                android:layout_weight="0.44"
+                android:layout_weight="0.41"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -188,13 +190,13 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="0dp" />
+                android:layout_height="0dp"
+                android:layout_weight=".06" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_margin="8dp"
-                android:layout_weight="0.41"
+                android:layout_weight="0.39"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -261,18 +263,36 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.056" />
             </LinearLayout>
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.07"
-                />
+                android:layout_weight="0.1"
+                tools:visibility="visible" />
         </LinearLayout>
+
+        <!-- ads:adUnitId는 반드시 string/banner로 해야 릴리즈 버전에서 보여줌 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.04"
+            android:background="#fafafa"
+            android:orientation="horizontal"></LinearLayout>
+
+        <com.google.android.ads.nativetemplates.TemplateView
+            android:id="@+id/adView_banner"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.14"
+            app:gnt_template_type="@layout/gnt_small_template_view" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.03"
-            android:background="#ffffff">
+            android:background="#ffffff"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -298,14 +318,6 @@
             </LinearLayout>
 
         </FrameLayout>
-        <!-- ads:adUnitId는 반드시 string/banner로 해야 릴리즈 버전에서 보여줌 -->
-        <com.google.android.ads.nativetemplates.TemplateView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.12"
-            android:id="@+id/adView_banner"
-            app:gnt_template_type="@layout/gnt_small_template_view"
-            />
 
     </LinearLayout>
 

@@ -43,7 +43,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:onClick="move_home"
                     android:scaleType="fitXY"
                     android:src="@drawable/logo" />
 
@@ -76,7 +75,7 @@
             android:id="@+id/menu_webView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.75"
+            android:layout_weight="0.76"
 
             />
 
@@ -114,11 +113,10 @@
         </FrameLayout>
 
         <com.google.android.ads.nativetemplates.TemplateView
+            android:id="@+id/adView_banner"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.12"
-            android:id="@+id/adView_banner"
-            app:gnt_template_type="@layout/gnt_small_template_view"
-            />
+            android:layout_weight="0.14"
+            app:gnt_template_type="@layout/gnt_small_template_view" />
     </LinearLayout>
 </layout>

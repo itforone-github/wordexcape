@@ -20,6 +20,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.google.android.ads.nativetemplates.NativeTemplateStyle;
 import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
@@ -43,6 +44,7 @@ public class MenuWebviewActivity extends AppCompatActivity {
     private ActivityManager am = ActivityManager.getInstance();
     String i_url="";
     public static final int VIEW_REFRESH =4;
+    int adClick = 0;
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class MenuWebviewActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        bannerAd();
+
 
 
         Intent i = getIntent();
@@ -96,7 +98,7 @@ public class MenuWebviewActivity extends AppCompatActivity {
         }
 
         binding.menuWebView.loadUrl(i_url);
-
+        bannerAd();
     }
 
     /*public void move_home(View view){
@@ -187,6 +189,11 @@ public class MenuWebviewActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     public void bannerAd(){
         MobileAds.initialize(this);
         AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.nativead))
@@ -199,9 +206,21 @@ public class MenuWebviewActivity extends AppCompatActivity {
                         template.setStyles(styles);
                         template.setNativeAd(nativeAd);
                     }
+                }).withAdListener(new AdListener() {
+                    @Override
+                    public void onAdClicked() {
+                        super.onAdClicked();
+                        bannerAd();
+                        adClick++;
+                    }
                 })
                 .build();
 
-        adLoader.loadAd(new AdRequest.Builder().build());;
+        if(adClick == 0) {
+            adLoader.loadAd(new AdRequest.Builder().build());
+        }else{
+            adLoader.loadAds(new AdRequest.Builder().build(),2);
+        }
+
     }
 }

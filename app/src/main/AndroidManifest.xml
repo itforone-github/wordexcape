@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.vocaescape.vocaescape">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 
     <application
         android:allowBackup="true"
@@ -18,7 +19,6 @@
 
         <activity
             android:name=".MainActivity"
-
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".MenuActivity"

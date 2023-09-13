@@ -6,32 +6,38 @@ import android.util.Log;
 import android.widget.SeekBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
+import com.google.android.ads.nativetemplates.NativeTemplateStyle;
+import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.vocaescape.vocaescape.util.ActivityManager;
+import com.google.android.gms.ads.nativead.NativeAd;
 import com.vocaescape.vocaescape.R;
+import com.vocaescape.vocaescape.databinding.ActivitySettingtextBinding;
+import com.vocaescape.vocaescape.util.ActivityManager;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class SettingTextActivity extends AppCompatActivity {
+    ActivitySettingtextBinding binding;
     public static int viewtextSize = 3;
     private ActivityManager am = ActivityManager.getInstance();
-    @BindView(R.id.adView_banner5)    AdView banner;
+
     @BindView(R.id.settingseek)    SeekBar settingtext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settingtext);
-        ButterKnife.bind(this);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_settingtext);
+        binding.setMain(this);
 
 
-         settingtext.setProgress(viewtextSize);
+         binding.settingseek.setProgress(viewtextSize);
 
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -39,9 +45,9 @@ public class SettingTextActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        banner.loadAd(new AdRequest.Builder().build());
 
-        settingtext.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+        binding.settingseek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             int now_progress = 0;
             @Override
@@ -64,7 +70,7 @@ public class SettingTextActivity extends AppCompatActivity {
             }
 
         });
-
+        bannerAd();
     }
 
     @Override
@@ -72,6 +78,23 @@ public class SettingTextActivity extends AppCompatActivity {
         finish();
         overridePendingTransition(R.anim.slide_inleft, R.anim.slide_outright);
     }
+    //광고 보여주기
+    public void bannerAd(){
+        MobileAds.initialize(this);
+        AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.nativead))
+                .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+                    @Override
+                    public void onNativeAdLoaded(NativeAd nativeAd) {
+                        NativeTemplateStyle styles = new
+                                NativeTemplateStyle.Builder().build();
+                        TemplateView template = findViewById(R.id.adView_banner);
+                        template.setStyles(styles);
+                        template.setNativeAd(nativeAd);
+                    }
+                })
+                .build();
 
+        adLoader.loadAds(new AdRequest.Builder().build(),1);
+    }
 
 }

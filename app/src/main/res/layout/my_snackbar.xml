@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#000000">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight=".7"
+        android:gravity="center_vertical"
+        android:text="앱을 종료하시겠습니까?"
+        android:textColor="#ffffff"/>
+
+    <TextView
+        android:id="@+id/txtOne"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight=".1"
+        android:gravity="center"
+        android:text="취소"
+        android:textColor="#ff0000"/>
+    <TextView
+        android:id="@+id/txtTwo"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight=".1"
+        android:gravity="center"
+        android:text="종료"
+        android:textColor="#ffffff"/>
+</LinearLayout>

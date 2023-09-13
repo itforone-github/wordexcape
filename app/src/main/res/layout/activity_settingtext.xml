@@ -1,143 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<layout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1"
-    >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:background="@drawable/bottom_stroke"
-        android:weightSum="1">
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-            <!--            <ImageView-->
-            <!--                android:id="@+id/xic"-->
-            <!--                android:visibility="gone"-->
-            <!--                android:layout_width="30dp"-->
-            <!--                android:layout_height="30dp"-->
-            <!--                android:layout_marginLeft="10dp"-->
-            <!--                android:scaleType="fitXY"-->
-            <!--                android:onClick="move_main"-->
-            <!--                android:layout_gravity="center_vertical|left"-->
-            <!--                android:src="@drawable/close"-->
-            <!--                />-->
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:src="@drawable/logo"
-                android:onClick="move_home"
-                />
+    xmlns:tools="http://schemas.android.com/tools">
 
-        </FrameLayout>
-    </LinearLayout>
+    <data>
+
+        <variable
+            name="main"
+            type="com.vocaescape.vocaescape.setting.SettingTextActivity" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.75"
-        android:background="@drawable/upbot_stroke"
-        android:weightSum="6"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="텍스트 크기"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:textSize="20dp"
-            />
-        <SeekBar
-            android:id="@+id/settingseek"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:max="6"
-            android:thumbTint="@color/black"
-            android:progressTint="@color/black"
-
-            />
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="A"
-                android:layout_gravity="top|left"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="50dp"
-                android:text="A"
-                android:layout_gravity="top|right"
-                />
-
-        </FrameLayout>
-
-
-
-
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.03"
-
-        android:background="#2d2d2d">
+        android:weightSum="1">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:background="@drawable/bottom_stroke"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:gravity="center_vertical"
-                android:text="구글 광고"
-                android:textColor="#fff"
-                android:textSize="12dp" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <!--            <ImageView-->
+                <!--                android:id="@+id/xic"-->
+                <!--                android:visibility="gone"-->
+                <!--                android:layout_width="30dp"-->
+                <!--                android:layout_height="30dp"-->
+                <!--                android:layout_marginLeft="10dp"-->
+                <!--                android:scaleType="fitXY"-->
+                <!--                android:onClick="move_main"-->
+                <!--                android:layout_gravity="center_vertical|left"-->
+                <!--                android:src="@drawable/close"-->
+                <!--                />-->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/logo" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="(Ad Mob by Google)"
-                android:textColor="#fff"
-                android:textSize="12dp" />
+            </FrameLayout>
         </LinearLayout>
 
-    </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.76"
+            android:orientation="vertical"
+            android:weightSum="6">
 
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView_banner5"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="0.12"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/banner"></com.google.android.gms.ads.AdView>
-</LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="텍스트 크기"
+                android:textSize="20dp" />
+
+            <SeekBar
+                android:id="@+id/settingseek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:max="6"
+                android:progressTint="@color/black"
+                android:thumbTint="@color/black"
+
+                />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|left"
+                    android:text="A"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|right"
+                    android:text="A"
+                    android:textSize="50dp" />
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+        <com.google.android.ads.nativetemplates.TemplateView
+            android:id="@+id/adView_banner"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.14"
+            app:gnt_template_type="@layout/gnt_small_template_view" />
+    </LinearLayout>
+</layout>

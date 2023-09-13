@@ -9,8 +9,8 @@ android {
         applicationId "com.vocaescape.vocaescape"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 23
-        versionName "3.10.22"
+        versionCode 26
+        versionName "3.11.25"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
